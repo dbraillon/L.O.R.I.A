@@ -24,6 +24,16 @@ namespace L.O.R.I.A_Core.Actions
                 askAction.Dispose();
         }
 
+        public string[] GetChoices()
+        {
+            List<string> choices = new List<string>();
+            
+            foreach(AskAction askAction in AskActions)
+                choices.AddRange(askAction.GetChoices());
+
+            return choices.ToArray();
+        }
+
         public string Ask(string choice)
         {
             string result = null;

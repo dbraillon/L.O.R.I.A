@@ -9,25 +9,25 @@ namespace L.O.R.I.A_Core.Actions
 {
     public class AskDateTime : AskAction
     {
-        private readonly string[] timeChoices;
+        private readonly string[] TimeChoices;
 
         private Choices AskChoices;
         
         public AskDateTime()
         {
-            timeChoices = new string[] 
+            TimeChoices = new string[] 
             { 
-                "Loria, quelle heure est-il ?",
-                "Loria, quelle heure il est ?",
-                "Loria, quelle heure c'est ?",
-                "Loria, c'est quelle heure ?",
-                "Quelle heure est-il Loria ?",
-                "Quelle heure il est Loria ?",
-                "C'est quelle heure Loria ?"
+                "Loria quelle heure est-il",
+                "Loria quelle heure il est",
+                "Loria quelle heure c'est",
+                "Loria c'est quelle heure",
+                "Quelle heure est-il Loria",
+                "Quelle heure il est Loria",
+                "C'est quelle heure Loria"
             };
 
             AskChoices = new Choices();
-            AskChoices.Add(timeChoices);
+            AskChoices.Add(TimeChoices);
         }
 
         public void Dispose()
@@ -35,11 +35,16 @@ namespace L.O.R.I.A_Core.Actions
 
         }
 
+        public string[] GetChoices()
+        {
+            return TimeChoices;
+        }
+
         public string Ask(string choice)
         {
             string result = null;
 
-            if (timeChoices.Contains(choice))
+            if (TimeChoices.Contains(choice))
                 result = string.Format("It's {0} hours {1}.", DateTime.Now.Hour, DateTime.Now.Minute);
 
             if (result == null)

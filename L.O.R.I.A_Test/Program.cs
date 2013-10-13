@@ -15,10 +15,12 @@ namespace L.O.R.I.A_Test
         {
             using (LoriaCore loriaCore = new LoriaCore())
             {
-                loriaCore.EmulateAsk("Loria, quelle heure est-il ?");
+                loriaCore.StartListening();
+                //loriaCore.EmulateAsk("Loria, quelle heure est-il ?");
+                Console.Read();
             }
 
-            Console.Read();
+            
         }
         /*
     {

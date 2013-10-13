@@ -9,20 +9,29 @@ namespace L.O.R.I.A_Core
 {
     public class LoriaCore : IDisposable
     {
-        private LoriaTextToSpeech TextToSpeech;
+        public LoriaSpeechRecognizer SpeechRecognizer;
+        public LoriaTextToSpeech TextToSpeech;
 
-        private ActionDispatcher ActionDispatcher;
+        public ActionDispatcher ActionDispatcher;
 
         public LoriaCore()
         {
-            TextToSpeech = new LoriaTextToSpeech();
             ActionDispatcher = new ActionDispatcher();
+
+            SpeechRecognizer = new LoriaSpeechRecognizer(this);
+            TextToSpeech = new LoriaTextToSpeech();
         }
 
         public void Dispose()
         {
-            TextToSpeech.Dispose();
             ActionDispatcher.Dispose();
+            SpeechRecognizer.Dispose();
+            TextToSpeech.Dispose();
+        }
+
+        public void StartListening()
+        {
+            SpeechRecognizer.StartListening();
         }
 
         public void EmulateAsk(string choice)

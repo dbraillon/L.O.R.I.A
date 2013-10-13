@@ -8,6 +8,7 @@ namespace L.O.R.I.A_Core.Actions
 {
     public interface AskAction : IDisposable
     {
+        string[] GetChoices();
         string Ask(string choice);
     }
 }
