@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.O.R.I.A_Test", "L.O.R.I.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.O.R.I.A Windows Service", "L.O.R.I.A Windows Service\L.O.R.I.A Windows Service.csproj", "{7F1CFC4D-9A37-4959-B318-CE0B6EB710D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.O.R.I.A Core", "L.O.R.I.A Core\L.O.R.I.A Core.csproj", "{3006D784-777B-4960-B956-525D4DDEE594}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.O.R.I.A", "L.O.R.I.A Core\L.O.R.I.A.csproj", "{3006D784-777B-4960-B956-525D4DDEE594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -41,14 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\ActionDispatcher.cs" />
-    <Compile Include="Actions\AskDateTime.cs" />
-    <Compile Include="Actions\AskAction.cs" />
-    <Compile Include="LoriaCore.cs" />
-    <Compile Include="LoriaSpeechRecognizer.cs" />
-    <Compile Include="LoriaTextToSpeech.cs" />
+    <Compile Include="Loria\Action\LActions.cs" />
+    <Compile Include="Loria\Action\Ask\DateTimeAsk.cs" />
+    <Compile Include="Loria\Action\Ask\IAsk.cs" />
+    <Compile Include="Loria\LCore.cs" />
+    <Compile Include="Loria\Speech\LRecognizer.cs" />
+    <Compile Include="Loria\Text\LVocalizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

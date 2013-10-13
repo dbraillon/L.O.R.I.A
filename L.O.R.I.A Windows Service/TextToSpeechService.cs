@@ -1,5 +1,4 @@
-﻿using L.O.R.I.A_Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,11 +30,7 @@ namespace L.O.R.I.A_Windows_Service
 
         private void Start()
         {
-            using (LoriaCore core = new LoriaCore())
-            {
-                while (IsRunning)
-                    Thread.Sleep(1000);
-            }
+            
         }
 
         protected override void OnStop()

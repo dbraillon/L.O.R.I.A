@@ -61,9 +61,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\L.O.R.I.A Core\L.O.R.I.A Core.csproj">
+    <ProjectReference Include="..\L.O.R.I.A Core\L.O.R.I.A.csproj">
       <Project>{3006d784-777b-4960-b956-525d4ddee594}</Project>
-      <Name>L.O.R.I.A Core</Name>
+      <Name>L.O.R.I.A</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

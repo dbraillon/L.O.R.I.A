@@ -1,4 +1,4 @@
-﻿using L.O.R.I.A_Core;
+﻿using Loria;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +13,12 @@ namespace L.O.R.I.A_Test
     {
         static void Main(string[] args)
         {
-            using (LoriaCore loriaCore = new LoriaCore())
+            using (LCore lCore = new LCore())
             {
-                loriaCore.StartListening();
-                //loriaCore.EmulateAsk("Loria, quelle heure est-il ?");
+                //lCore.Listen();
+                lCore.EmulateAsk("Loria il est quelle heure");
                 Console.Read();
             }
-
-            
         }
         /*
     {
