@@ -13,6 +13,8 @@ namespace Loria.Text
             Synthesizer = new SpeechSynthesizer();
             Synthesizer.SetOutputToDefaultAudioDevice();
             Synthesizer.Rate = 0;
+
+            // User have to install this voice in order to use it
             Synthesizer.SelectVoice("ScanSoft Virginie_Dri40_16kHz");
         }
 

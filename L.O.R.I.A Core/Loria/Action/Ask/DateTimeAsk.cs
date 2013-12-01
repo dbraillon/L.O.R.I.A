@@ -4,7 +4,7 @@ using System.Speech.Recognition;
 
 namespace Loria.Action.Ask
 {
-    public class AskDateTime : IAskAction
+    public class AskDateTime : IAsk
     {
         private readonly string[] DateStringAsk;
         private readonly string[] TimeStringAsk;
