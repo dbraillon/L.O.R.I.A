@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module name="Module d'heure et de date.">
+  <actions>
+    <action name="Time">
+      <phrases>
+        <phrase>Loria quelle heure est-il</phrase>
+        <phrase>Loria quelle heure il est</phrase>
+        <phrase>Loria quelle heure c'est</phrase>
+        <phrase>Loria c'est quelle heure</phrase>
+        <phrase>Loria il est quelle heure</phrase>
+        <phrase>Loria quelle heure est-il</phrase>
+        <phrase>Quelle heure est-il Loria</phrase>
+        <phrase>Quelle heure il est Loria</phrase>
+        <phrase>Quelle heure c'est Loria</phrase>
+        <phrase>C'est quelle heure Loria</phrase>
+      </phrases>
+    </action>
+    <action name="Date">
+      <phrases>
+        <phrase>Loria on est quand</phrase>
+        <phrase>On est quand Loria</phrase>
+        <phrase>Quel jour on est Loria</phrase>
+        <phrase>Loria quel jour on est</phrase>
+        <phrase>Quel jour c'est Loria</phrase>
+        <phrase>Loria c'est quel jour</phrase>
+        <phrase>Loria on est quel jour</phrase>
+        <phrase>Loria on est quelle date</phrase>
+        <phrase>Quelle date on est Loria</phrase>
+      </phrases>
+    </action>
+  </actions>
+</module>

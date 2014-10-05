@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module name="Module de météo.">
+  <actions>
+    <action name="Weather">
+      <phrases>
+        <phrase>Loria quelle temps il fait aujourd'hui</phrase>
+        <phrase>Loria quelle temps fait-il aujourd'hui</phrase>
+      </phrases>
+    </action>
+  </actions>
+</module>
