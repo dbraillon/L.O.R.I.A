@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module name="Module de lancement de programmes tierces.">
+  <actions>
+    <action name="Age of Mythologie: Extended Edition - Steam Launch" program="steam.exe" arguments="-applaunch 266840">
+      <phrases>
+        <phrase>Loria lance Age of Mythologie</phrase>
+      </phrases>
+    </action>
+	  <action name="The Binding of Isaac - Steam Launch" program="steam.exe" arguments="-applaunch 113200">
+      <phrases>
+        <phrase>Loria lance Binding of Isaac</phrase>
+      </phrases>
+    </action>
+	  <action name="Castle Crashers - Steam Launch" program="steam.exe" arguments="-applaunch 204360">
+      <phrases>
+        <phrase>Loria lance Castle Crashers</phrase>
+      </phrases>
+    </action>
+	  <action name="Counter-Strike: Global Offensive - Steam Launch" program="steam.exe" arguments="-applaunch 730">
+      <phrases>
+        <phrase>Loria lance Counter-Strike</phrase>
+      </phrases>
+    </action>
+	  <action name="Divinity: Orignal Sin - Steam Launch" program="steam.exe" arguments="-applaunch 230230">
+      <phrases>
+        <phrase>Loria lance Divinity Orignal Sin</phrase>
+      </phrases>
+    </action>
+	  <action name="Left For Dead 2 - Steam Launch" program="steam.exe" arguments="-applaunch 550">
+      <phrases>
+        <phrase>Loria lance Left For Dead 2</phrase>
+      </phrases>
+    </action>
+	  <action name="Life is Feudal: Your Own - Steam Launch" program="steam.exe" arguments="-applaunch 290080">
+      <phrases>
+        <phrase>Loria lance Life is Feudal</phrase>
+      </phrases>
+    </action>
+    <action name="League of Legends - Game Launch" program="C:/Riot Games/League of Legends/lol.launcher.exe" arguments="">
+      <phrases>
+        <phrase>Loria lance League of Legends</phrase>
+      </phrases>
+    </action>
+    <action name="Warcraft 3 Frozen Throne - Game Launch" program="C:/Program Files (x86)/Warcraft III/Frozen Throne.exe" arguments="-window">
+      <phrases>
+        <phrase>Loria lance Warcraft 3</phrase>
+      </phrases>
+    </action>
+  </actions>
+</module>

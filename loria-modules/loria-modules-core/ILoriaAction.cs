@@ -9,6 +9,6 @@ namespace Loria.Module.Core
     public interface ILoriaAction
     {
         void Start(string[] args);
-        string Ask(string phrase, string name);
+        string Ask(LoriaAction loriaAction);
     }
 }

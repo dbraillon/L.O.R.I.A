@@ -23,11 +23,11 @@ namespace Loria.Module.Weather
             loriaModule.Ask(args, this);
         }
 
-        public string Ask(string phrase, string name)
+        public string Ask(LoriaAction loriaAction)
         {
             string answer = null;
 
-            if (name == "Weather")
+            if (loriaAction.Name == "Weather")
             {
                 try
                 {

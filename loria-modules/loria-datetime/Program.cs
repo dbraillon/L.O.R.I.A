@@ -1,9 +1,4 @@
 ﻿using Loria.Module.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Loria.Module.DateTime
 {
@@ -21,16 +16,16 @@ namespace Loria.Module.DateTime
             loriaModule.Ask(args, this);
         }
 
-        public string Ask(string phrase, string name)
+        public string Ask(LoriaAction loriaAction)
         {
             string answer = null;
 
-            if (name == "Date")
+            if (loriaAction.Name == "Date")
                 answer = string.Format("Nous sommes le {0}.", System.DateTime.Now.ToLongDateString());
 
-            if (name == "Time")
+            if (loriaAction.Name == "Time")
                 answer = string.Format("Il est {0} heures {1}.", System.DateTime.Now.Hour, System.DateTime.Now.Minute);
-
+                
             return answer;
         }
     }

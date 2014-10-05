@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-modules-core", "loria
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-weather", "loria-modules\loria-weather\loria-weather.csproj", "{3EF53C2D-4AA0-479B-A0A3-40A88187C057}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-website", "loria-website\loria-website.csproj", "{05F25554-251E-41FC-B6A4-08B3FA6517A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-launcher", "loria-modules\loria-launcher\loria-launcher.csproj", "{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,14 @@ Global
 		{3EF53C2D-4AA0-479B-A0A3-40A88187C057}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF53C2D-4AA0-479B-A0A3-40A88187C057}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF53C2D-4AA0-479B-A0A3-40A88187C057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,5 +61,6 @@ Global
 		{DD117D0F-44EB-4ED3-A2C9-7E90738FB9EA} = {35F4FCDA-5EAC-453A-B293-7925BB68ABDB}
 		{C371CD9A-A76E-40C1-95F2-E7237484FC7A} = {35F4FCDA-5EAC-453A-B293-7925BB68ABDB}
 		{3EF53C2D-4AA0-479B-A0A3-40A88187C057} = {35F4FCDA-5EAC-453A-B293-7925BB68ABDB}
+		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7} = {35F4FCDA-5EAC-453A-B293-7925BB68ABDB}
 	EndGlobalSection
 EndGlobal

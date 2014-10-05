@@ -57,7 +57,7 @@ namespace Loria.Module.Core
             }
         }
 
-        public void Ask(string[] args, ILoriaAction loriaAction)
+        public void Ask(string[] args, ILoriaAction loriaActionHandler)
         {
             if (!IsError)
             {
@@ -68,9 +68,9 @@ namespace Loria.Module.Core
                 }
 
                 string phrase = args[0];
-                string name = LoriaActions.First(a => a.Phrases.Contains(phrase)).Name;
+                LoriaAction loriaAction = LoriaActions.First(a => a.Phrases.Contains(phrase));
 
-                string answer = loriaAction.Ask(phrase, name);
+                string answer = loriaActionHandler.Ask(loriaAction);
                 if (string.IsNullOrEmpty(answer))
                 {
                     Console.WriteLine(PHRASE_ERROR_RESPONSE);

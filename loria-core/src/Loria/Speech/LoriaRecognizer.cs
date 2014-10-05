@@ -1,7 +1,9 @@
 ﻿using Loria.Module;
 using Loria.Text;
 using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Speech.Recognition;
 using System.Threading;
 
@@ -9,6 +11,7 @@ namespace Loria.Speech
 {
     public class LoriaRecognizer
     {
+        private const string GIVE_VERSION_PHRASE = "Loria donne moi ta version.";
         private const string RELOAD_MODULE_PHRASE = "Loria recharge tes modules.";
         private const string LIST_MODULE_PHRASE = "Loria liste-moi tes modules.";
         private const string GO_TO_SLEEP_PHRASE = "Loria va dormir.";
@@ -97,6 +100,9 @@ namespace Loria.Speech
                 ModuleLoader = new LoriaModuleLoader();
                 choices = ModuleLoader.GetChoices();
 
+                // Add give version phrase
+                choices.Add(GIVE_VERSION_PHRASE);
+
                 // Add reload module phrase
                 choices.Add(RELOAD_MODULE_PHRASE);
 
@@ -126,7 +132,7 @@ namespace Loria.Speech
         // Recognizer thread
         private void Listen()
         {
-            while (RecognizerThread.ThreadState == ThreadState.Running)
+            while (RecognizerThread.ThreadState == System.Threading.ThreadState.Running)
             {
                 try
                 {
@@ -145,7 +151,16 @@ namespace Loria.Speech
 
             if (e.Result.Confidence >= 0.5f)
             {
-                if (e.Result.Text == RELOAD_MODULE_PHRASE)
+                if (e.Result.Text == GIVE_VERSION_PHRASE)
+                {
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+                    string versionPhrase = string.Format("Je suis en version {0}.", fvi.FileVersion);
+
+                    Vocalizer.Speech(versionPhrase);
+                }
+                else if (e.Result.Text == RELOAD_MODULE_PHRASE)
                 {
                     Load();
 
