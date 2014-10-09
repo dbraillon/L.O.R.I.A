@@ -1,6 +1,7 @@
 ﻿using Loria.Module;
 using Loria.Text;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -16,6 +17,7 @@ namespace Loria.Speech
         private const string LIST_MODULE_PHRASE = "Loria liste-moi tes modules.";
         private const string GO_TO_SLEEP_PHRASE = "Loria va dormir.";
         private const string WAKE_UP_PHRASE = "Loria reveille toi.";
+        public const string GIVE_ME_NEWS_PHRASE = "Loria tu as des choses à me dire.";
 
         public bool IsRunning { get; set; }
         public bool IsSleeping { get; set; }
@@ -111,6 +113,9 @@ namespace Loria.Speech
 
                 // Add go to sleep phrase
                 choices.Add(GO_TO_SLEEP_PHRASE);
+
+                // Add give me news phrase
+                choices.Add(GIVE_ME_NEWS_PHRASE);
             }
             else
             {
@@ -180,12 +185,25 @@ namespace Loria.Speech
                 {
                     WakeUp();
                 }
+                else if (e.Result.Text == GIVE_ME_NEWS_PHRASE)
+                {
+                    foreach (LoriaModule loriaModule in ModuleLoader.LoriaModules)
+                    {
+                        List<string> answers = loriaModule.Ask(GIVE_ME_NEWS_PHRASE).ToList();
+
+                        foreach (string answer in answers)
+                        {
+                            Vocalizer.Speech(answer);
+                            Thread.Sleep(500);
+                        }
+                    }
+                }
                 else
                 {
                     LoriaModule loriaModule = ModuleLoader.GetModule(e.Result.Text);
                     if (loriaModule != null)
                     {
-                        Vocalizer.Speech(loriaModule.Ask(e.Result.Text));
+                        Vocalizer.Speech(loriaModule.Ask(e.Result.Text).First());
                     }
                 }
             }

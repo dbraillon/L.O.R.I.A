@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Loria.Module.Launcher
 {
-    public class Program : ILoriaAction
+    public class Program : ILoriaActionOnDemand
     {
         static void Main(string[] args)
         {

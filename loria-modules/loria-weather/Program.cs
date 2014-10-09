@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace Loria.Module.Weather
 {
-    public class Program : ILoriaAction
+    public class Program : ILoriaActionOnDemand
     {
         static void Main(string[] args)
         {

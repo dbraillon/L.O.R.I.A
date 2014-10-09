@@ -19,10 +19,11 @@ namespace Loria.Module
             {
                 try
                 {
-                    string xmlFilePath = Path.Combine(moduleDirectoryPath, "Phrases.xml");
+                    string configFilePath = Path.Combine(moduleDirectoryPath, "config.xml");
+                    string databaseFilePath = Path.Combine(moduleDirectoryPath, "database.xml");
                     string programFilePath = Path.Combine(moduleDirectoryPath, string.Format("{0}.exe", Path.GetFileName(moduleDirectoryPath)));
 
-                    LoriaModules.Add(new LoriaModule(new FileInfo(xmlFilePath), new FileInfo(programFilePath)));
+                    LoriaModules.Add(new LoriaModule(new FileInfo(configFilePath), new FileInfo(databaseFilePath), new FileInfo(programFilePath)));
                 }
                 catch (Exception) { }
             }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Loria.Module.Core
 {
-    public interface ILoriaAction
+    public interface ILoriaActionHandler
     {
-        void Start(string[] args);
-        string Ask(LoriaAction loriaAction);
+        IEnumerable<string> OnDemand(LoriaAction loriaAction);
+        void InsideLoop(LoriaAction loriaAction);
     }
 }

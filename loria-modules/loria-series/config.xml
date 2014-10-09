@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module name="Module de gestion des films et séries"
+        startphrase="Je cherche des nouveaux épisode de {name}" middlephrase=", de {name}" endphrase="et de {name}.">
+  <actions>
+    <action name="The Good Wife" type="Repeat" repeat="86400" season="6" episode="1" />
+    <action name="Once Upon A Time" type="Repeat" repeat="86400" season="3" episode="22" />
+    <action name="Suits" type="Repeat" repeat="86400" season="4" episode="10" />
+    <action name="Heartland" type="Repeat" repeat="86400" season="8" episode="1" />
+    <action name="Under The Dome" type="Repeat" repeat="86400" season="2" episode="13" />
+    <action name="Teen Wolf" type="Repeat" repeat="86400" season="4" episode="12" />
+    <action name="The Leftovers" type="Repeat" repeat="86400" season="1" episode="10" />
+  </actions>
+</module>

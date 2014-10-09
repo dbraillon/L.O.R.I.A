@@ -1,22 +1,17 @@
 ﻿using Loria.Module.Core;
+using System.Collections.Generic;
 
 namespace Loria.Module.DateTime
 {
-    public class Program : ILoriaAction
+    public class Program : ILoriaActionHandler
     {
         static void Main(string[] args)
         {
-            Program program = new Program();
-            program.Start(args);
-        }
-
-        public void Start(string[] args)
-        {
             LoriaModule loriaModule = new LoriaModule();
-            loriaModule.Ask(args, this);
+            loriaModule.Start(new Program());
         }
 
-        public string Ask(LoriaAction loriaAction)
+        public string OnDemand(LoriaAction loriaAction)
         {
             string answer = null;
 
@@ -25,8 +20,13 @@ namespace Loria.Module.DateTime
 
             if (loriaAction.Name == "Time")
                 answer = string.Format("Il est {0} heures {1}.", System.DateTime.Now.Hour, System.DateTime.Now.Minute);
-                
+
             return answer;
+        }
+
+        public void InsideLoop(List<LoriaAction> loriaActions)
+        {
+            // Nothing
         }
     }
 }

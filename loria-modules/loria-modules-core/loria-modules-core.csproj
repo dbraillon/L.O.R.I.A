@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILoriaAction.cs" />
+    <Compile Include="ILoriaActionHandler.cs" />
     <Compile Include="LoriaAction.cs" />
     <Compile Include="LoriaModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
