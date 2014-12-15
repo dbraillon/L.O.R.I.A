@@ -1,13 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<database>
+﻿<database>
   <questions>
   </questions>
-  <series>
-    <serie name="The Good Wife">
-      <season value="6">
-        <episode value="1" downloaded="True">The Line</episode>
-        <episode value="2" downloaded="False">Trust Issues</episode>
-      </season>
-    </serie>
-  </series>
 </database>

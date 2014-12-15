@@ -16,6 +16,8 @@ namespace Loria.Module.Core
     {
         public string Name { get; set; }
         public List<LoriaAction> LoriaActions { get; set; }
+        public FileInfo DatabaseXmlFile { get; set; }
+        public FileInfo ConfigXmlFile { get; set; }
 
         public LoriaModule()
         {
@@ -23,14 +25,16 @@ namespace Loria.Module.Core
             Name = "Module inconnu";
             LoriaActions = new List<LoriaAction>();
 
+            string databaseXmlPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "database.xml");
+            string configXmlPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "config.xml");
+            DatabaseXmlFile = new FileInfo(databaseXmlPath);
+            ConfigXmlFile = new FileInfo(configXmlPath);
+
             try
             {
-                // Get config.xml path
-                string xmlPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "config.xml");
-
                 // Load config.xml
                 XmlDocument configXml = new XmlDocument();
-                configXml.Load(xmlPath);
+                configXml.Load(configXmlPath);
 
                 // Retrieve module node and its name and type attributes
                 XmlNode moduleNode = configXml.SelectSingleNode("//module");
@@ -75,10 +79,10 @@ namespace Loria.Module.Core
                     string question = questions.First();
                     string answer = "Aucune action pour cette phrase.";
 
-                    LoriaAction loriaAction = LoriaActions.FirstOrDefault(a => a.Phrases.Contains(question));
+                    LoriaAction loriaAction = LoriaActions.FirstOrDefault(a => a.Id.Contains(question));
                     if (loriaAction != null)
                     {
-                        string actionAnswer = actionHandler.OnDemand(loriaAction).FirstOrDefault();
+                        string actionAnswer = actionHandler.OnDemand(loriaAction, DatabaseXmlFile).FirstOrDefault();
                         if (!string.IsNullOrEmpty(actionAnswer))
                         {
                             answer = actionAnswer;
@@ -95,13 +99,13 @@ namespace Loria.Module.Core
                     var timer = new System.Timers.Timer(repeatAction.RepeatDelay * 1000);
                     timer.AutoReset = true;
                     timer.Elapsed += (sender, e) => 
-                        { 
-                            SetDelayedAnswers(actionHandler.OnDemand(repeatAction).ToList());
+                        {
+                            SetDelayedAnswers(actionHandler.OnDemand(repeatAction, DatabaseXmlFile).ToList());
                         };
                     timer.Start();
 
                     // Tick now
-                    SetDelayedAnswers(actionHandler.OnDemand(repeatAction).ToList());
+                    SetDelayedAnswers(actionHandler.OnDemand(repeatAction, DatabaseXmlFile).ToList());
                 }
 
                 while (true)
@@ -116,7 +120,7 @@ namespace Loria.Module.Core
                             foreach (string questionForThisAction in questionsForThisAction)
                             {
                                 string answer = "Aucune action pour cette phrase.";
-                                string actionAnswer = actionHandler.OnDemand(loriaAction).FirstOrDefault();
+                                string actionAnswer = actionHandler.OnDemand(loriaAction, DatabaseXmlFile).FirstOrDefault();
 
                                 if (!string.IsNullOrEmpty(actionAnswer))
                                 {
@@ -128,7 +132,7 @@ namespace Loria.Module.Core
                         }
                         else if (loriaAction.Type == LoriaActionType.BACKGROUND)
                         {
-                            actionHandler.InsideLoop(loriaAction);
+                            actionHandler.InsideLoop(loriaAction, DatabaseXmlFile);
                         }
                     }
 

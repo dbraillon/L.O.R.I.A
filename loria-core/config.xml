@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module name="Core">
+  <actions>
+    <action id="version" name="Version" type="OnDemand">
+      <phrases>
+        <phrase>Loria, donne moi ta version.</phrase>
+      </phrases>
+    </action>
+    <action id="reload_module" name="Recharge modules" type="OnDemand">
+      <phrases>
+        <phrase>Loria, recharge tes modules.</phrase>
+      </phrases>
+    </action>
+    <action id="list_module" name="Liste modules" type="OnDemand">
+      <phrases>
+        <phrase>Loria, liste-moi tes modules.</phrase>
+      </phrases>
+    </action>
+    <action id="sleep" name="Dormir" type="OnDemand">
+      <phrases>
+        <phrase>Loria, va dormir.</phrase>
+      </phrases>
+    </action>
+    <action id="wakeup" name="Reveiller" type="OnDemand" canDoAsleep="True">
+      <phrases>
+        <phrase>Loria, réveille-toi.</phrase>
+      </phrases>
+    </action>
+    <action id="news" name="Nouvelles" type="OnDemand">
+      <phrases>
+        <phrase>Loria, tu as des choses à me dire ?</phrase>
+      </phrases>
+    </action>
+  </actions>
+</module>

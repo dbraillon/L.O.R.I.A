@@ -8,48 +8,53 @@ using System.Threading.Tasks;
 
 namespace Loria.Module.Launcher
 {
-    public class Program : ILoriaActionOnDemand
+    public class Program : ILoriaActionHandler
     {
         static void Main(string[] args)
         {
-            Program program = new Program();
-            program.Start(args);
-        }
-
-        public void Start(string[] args)
-        {
             LoriaModule loriaModule = new LoriaModule();
-            loriaModule.Ask(args, this);
+            loriaModule.Start(new Program());
         }
 
-        public string Ask(LoriaAction loriaAction)
+        public IEnumerable<string> OnDemand(LoriaAction loriaAction, System.IO.FileInfo databaseFile)
         {
-            string answer = null;
+            List<string> answers = new List<string>();
 
             try
             {
-                using (var process = new Process
+                var programAttribute = loriaAction.AdditionalAttributes.FirstOrDefault(kvp => kvp.Key == "program");
+                var argumentsAttribute = loriaAction.AdditionalAttributes.FirstOrDefault(kvp => kvp.Key == "arguments");
+
+                if (!programAttribute.Equals(default(KeyValuePair<string, string>)))
                 {
-                    StartInfo = new ProcessStartInfo
+                    using (var process = new Process
                     {
-                        FileName = loriaAction.Program,
-                        Arguments = loriaAction.Arguments,
-                        UseShellExecute = false,
-                        CreateNoWindow = true
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = programAttribute.Value,
+                            Arguments = !argumentsAttribute.Equals(default(KeyValuePair<string, string>)) ? argumentsAttribute.Value : "",
+                            UseShellExecute = false,
+                            CreateNoWindow = true
+                        }
+                    })
+                    {
+                        process.Start();
                     }
-                })
-                {
-                    process.Start();
                 }
 
-                answer = string.Format("C'est fait !");
+                answers.Add(string.Format("C'est fait !"));
             }
             catch (Exception)
             {
-                answer = "Je n'arrive pas à lancer le programme.";
+                answers.Add("Je n'arrive pas à lancer le programme.");
             }
 
-            return answer;
+            return answers;
+        }
+
+        public void InsideLoop(LoriaAction loriaAction, System.IO.FileInfo databaseFile)
+        {
+            throw new NotImplementedException();
         }
     }
 }

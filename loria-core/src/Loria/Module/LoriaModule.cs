@@ -1,4 +1,7 @@
-﻿using Loria.Speech;
+﻿using Loria.Core.Debug;
+using Loria.Core.src.Loria.Module;
+using Loria.Core.src.Loria.Module.CoreModules;
+using Loria.Speech;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,81 +12,125 @@ namespace Loria.Module
 {
     public class LoriaModule
     {
-        public FileInfo ConfigFile { get; set; }
-        public FileInfo DatabaseFile { get; set; }
-        public FileInfo ProgramFile { get; set; }
+        private ILoggable LogManager;
+        protected FileInfo ConfigFile, DatabaseFile, ProgramFile;
+        
+        public string ModuleName { get; set; }
+        public List<LoriaAction> LoriaActions { get; set; }
 
-        public string Name { get; set; }
-        public List<string> Phrases { get; set; }
-
-        public LoriaModule(FileInfo configFile, FileInfo databaseFile, FileInfo programFile)
+        public LoriaModule(ILoggable logManager = null, FileInfo configFile = null, FileInfo databaseFile = null, FileInfo programFile = null)
         {
+            LogManager = logManager;
+
+            LoriaActions = new List<LoriaAction>();
             ConfigFile = configFile;
             DatabaseFile = databaseFile;
             ProgramFile = programFile;
-            Phrases = new List<string>();
-
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(ConfigFile.FullName);
-
-            XmlNode moduleNode = xmlDocument.SelectSingleNode("//module");
-            XmlAttribute moduleNameNode = moduleNode.Attributes["name"];
-            Name = moduleNameNode.Value;
-
-            XmlNodeList phraseNodes = xmlDocument.SelectNodes("//phrase");
-            foreach (XmlNode phraseNode in phraseNodes)
-            {
-                Phrases.Add(phraseNode.InnerText);
-            }
         }
 
-        public IEnumerable<string> Ask(string phrase)
+        public LoriaAnswer LoadConfigFile()
         {
-            List<string> answers = new List<string>();
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Chargement d'un module.");
+
+            LoriaActions.Clear();
+            ModuleName = string.Empty;
+
+            if (ConfigFile != null)
+            {
+                try
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(ConfigFile.FullName);
+
+                    XmlNode moduleNode = xmlDocument.SelectSingleNode("//module");
+                    XmlAttribute moduleNameNode = moduleNode.Attributes["name"];
+                    ModuleName = moduleNameNode.Value;
+
+                    XmlNodeList actionNodes = xmlDocument.SelectNodes("//action");
+                    foreach (XmlNode actionNode in actionNodes)
+                    {
+                        XmlAttribute actionIdAttribute = actionNode.Attributes["id"];
+                        XmlAttribute actionNameAttribute = actionNode.Attributes["name"];
+                        XmlAttribute actionTypeAttribute = actionNode.Attributes["type"];
+                        XmlAttribute canDoAsleepAttribute = actionNode.Attributes["canDoAsleep"];
+
+                        LoriaAction loriaAction = new LoriaAction(this)
+                        {
+                            Id = actionIdAttribute.Value,
+                            Name = actionNameAttribute.Value,
+                            Type = (LoriaActionType)Enum.Parse(typeof(LoriaActionType), actionTypeAttribute.Value),
+                            CanDoAsleep = canDoAsleepAttribute == null ? false : canDoAsleepAttribute.Value.ToLower() == Boolean.TrueString.ToLower() ? true : false,
+                            Phrases = new List<string>()
+                        };
+
+                        XmlNodeList phraseNodes = actionNode.SelectNodes(".//phrase");
+                        foreach (XmlNode phraseNode in phraseNodes)
+                        {
+                            string phrase = phraseNode.InnerText;
+
+                            loriaAction.Phrases.Add(phrase);
+                        }
+
+                        LoriaActions.Add(loriaAction);
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (LogManager != null) LogManager.WriteLog(LogType.ERROR, "Le chargement d'un module a échoué '{0}'.", e.ToString());
+
+                    return new LoriaAnswer(false, true, "Je n'arrive pas à charger un module.");
+                }
+            }
+
+            return new LoriaAnswer(true);
+        }
+
+        public virtual IEnumerable<LoriaAnswer> DoAction(LoriaCore loriaCore, LoriaAction loriaAction)
+        {
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Start the action '{0}'.", loriaAction.Name);
+
+            List<LoriaAnswer> loriaAnswers = new List<LoriaAnswer>();
 
             try
             {
-                if (phrase == LoriaRecognizer.GIVE_ME_NEWS_PHRASE)
+                SetQuestion(loriaAction.Id);
+
+                using (var process = new Process
                 {
-                    answers.AddRange(GetDelayedAnswers());
-                }
-                else
-                {
-                    SetQuestion(phrase);
-
-                    using (var process = new Process
+                    StartInfo = new ProcessStartInfo
                     {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = ProgramFile.FullName,
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            CreateNoWindow = true
-                        }
-                    })
-                    {
-                        process.Start();
-                        process.WaitForExit(10000);
-
-                        if (!process.HasExited)
-                        {
-                            process.Kill();
-                        }
-
-                        answers.Add(GetAnswer());
+                        FileName = ProgramFile.FullName,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
                     }
+                })
+                {
+                    process.Start();
+                    process.WaitForExit(10000);
+
+                    if (!process.HasExited)
+                    {
+                        process.Kill();
+                    }
+
+                    loriaAnswers.Add(GetAnswer());
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                answers.Add(string.Format("Je ne trouve pas le {0}.", Name));
+                if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Something went wrong while running the action '{0}', see error below.{1}{2}", loriaAction.Name, Environment.NewLine, e.ToString());
+
+                loriaAnswers.Add(new LoriaAnswer(false, true, string.Format("Je ne trouve pas le module {0}.", ModuleName)));
             }
 
-            return answers;
+            return loriaAnswers;
         }
 
         private void SetQuestion(string question)
         {
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Add a question for the module '{0}'.", ModuleName);
+
             // Load database.xml
             XmlDocument databaseXml = new XmlDocument();
             databaseXml.Load(DatabaseFile.FullName);
@@ -117,15 +164,17 @@ namespace Loria.Module
             databaseXml.Save(DatabaseFile.FullName);
         }
 
-        private string GetAnswer()
+        private LoriaAnswer GetAnswer()
         {
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Get answer for the module '{0}'.", ModuleName);
+
             string answer = "Le module n'a pas répondu a temps.";
 
             // Load database.xml
             XmlDocument databaseXml = new XmlDocument();
             databaseXml.Load(DatabaseFile.FullName);
 
-            XmlNode questionNode = databaseXml.SelectSingleNode("//question[@answered='True' and delayed='False']");
+            XmlNode questionNode = databaseXml.SelectSingleNode("//question[@answered='True' and @delayed='False']");
             if (questionNode != null)
             {
                 if (!string.IsNullOrEmpty(questionNode.InnerText))
@@ -137,7 +186,7 @@ namespace Loria.Module
                 databaseXml.Save(DatabaseFile.FullName);
             }
 
-            return answer;
+            return new LoriaAnswer(true, true, answer);
         }
 
         private IEnumerable<string> GetDelayedAnswers()

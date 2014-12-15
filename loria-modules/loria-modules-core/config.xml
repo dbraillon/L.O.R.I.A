@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <module name="Module d'heure et de date.">
   <actions>
-    <action id="Time" name="Time" type="OnDemand">
+    <action name="Time" type="OnDemand">
       <phrases>
         <phrase>Loria quelle heure est-il</phrase>
         <phrase>Loria quelle heure il est</phrase>
@@ -15,7 +15,7 @@
         <phrase>C'est quelle heure Loria</phrase>
       </phrases>
     </action>
-    <action id="Date" name="Date" type="OnDemand">
+    <action name="Date" type="OnDemand">
       <phrases>
         <phrase>Loria on est quand</phrase>
         <phrase>On est quand Loria</phrase>

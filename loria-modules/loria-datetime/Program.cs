@@ -1,4 +1,5 @@
 ﻿using Loria.Module.Core;
+using System;
 using System.Collections.Generic;
 
 namespace Loria.Module.DateTime
@@ -11,22 +12,22 @@ namespace Loria.Module.DateTime
             loriaModule.Start(new Program());
         }
 
-        public string OnDemand(LoriaAction loriaAction)
+        public IEnumerable<string> OnDemand(LoriaAction loriaAction, System.IO.FileInfo databaseFile)
         {
-            string answer = null;
+            List<string> answers = new List<string>();
 
             if (loriaAction.Name == "Date")
-                answer = string.Format("Nous sommes le {0}.", System.DateTime.Now.ToLongDateString());
+                answers.Add(string.Format("Nous sommes le {0}.", System.DateTime.Now.ToLongDateString()));
 
             if (loriaAction.Name == "Time")
-                answer = string.Format("Il est {0} heures {1}.", System.DateTime.Now.Hour, System.DateTime.Now.Minute);
+                answers.Add(string.Format("Il est {0} heures {1}.", System.DateTime.Now.Hour, System.DateTime.Now.Minute));
 
-            return answer;
+            return answers;
         }
 
-        public void InsideLoop(List<LoriaAction> loriaActions)
+        public void InsideLoop(LoriaAction loriaAction, System.IO.FileInfo databaseFile)
         {
-            // Nothing
+            throw new NotImplementedException();
         }
     }
 }

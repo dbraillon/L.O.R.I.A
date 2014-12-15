@@ -16,6 +16,7 @@ namespace Loria.Module.Core
     {
         public const string ANYTHING_NEW_ACTION = "Loria, tu as des choses à me dire ?";
 
+        public string Id { get; set; }
         public string Name { get; set; }
         public LoriaActionType Type { get; set; }
         public int RepeatDelay { get; set; }
@@ -36,6 +37,12 @@ namespace Loria.Module.Core
             {
                 LoriaAction loriaAction = new LoriaAction();
 
+                XmlAttribute actionIdAttribute = actionNode.Attributes["id"];
+                if (actionIdAttribute == null || string.IsNullOrEmpty(actionIdAttribute.Value))
+                {
+                    throw new XmlException("Impossible de lire le XML de configuration. Une action n'a pas d'ID.");
+                }
+
                 XmlAttribute actionNameAttribute = actionNode.Attributes["name"];
                 if (actionNameAttribute == null || string.IsNullOrEmpty(actionNameAttribute.Value))
                 {
@@ -55,6 +62,10 @@ namespace Loria.Module.Core
                     string actionRepeat = actionRepeatAttribute.Value;
                     loriaAction.RepeatDelay = int.Parse(actionRepeat);
                 }
+
+                // Retrieve action id from attribute
+                string actionId = actionIdAttribute.Value;
+                loriaAction.Id = actionId;
 
                 // Retrieve action name from attribute
                 string actionName = actionNameAttribute.Value;

@@ -9,23 +9,17 @@ using System.Xml;
 
 namespace Loria.Module.Weather
 {
-    public class Program : ILoriaActionOnDemand
+    public class Program : ILoriaActionHandler
     {
         static void Main(string[] args)
         {
-            Program program = new Program();
-            program.Start(args);
-        }
-
-        public void Start(string[] args)
-        {
             LoriaModule loriaModule = new LoriaModule();
-            loriaModule.Ask(args, this);
+            loriaModule.Start(new Program());
         }
 
-        public string Ask(LoriaAction loriaAction)
+        public IEnumerable<string> OnDemand(LoriaAction loriaAction, System.IO.FileInfo databaseFile)
         {
-            string answer = null;
+            List<string> answers = new List<string>();
 
             if (loriaAction.Name == "Weather")
             {
@@ -52,7 +46,7 @@ namespace Loria.Module.Weather
                                 Weather = weatherValueAttribute.Value
                             };
 
-                            answer = weatherResponse.ToString();
+                            answers.Add(weatherResponse.ToString());
                         }
                         else
                         {
@@ -62,11 +56,16 @@ namespace Loria.Module.Weather
                 }
                 catch (Exception)
                 {
-                    answer = "Je n'arrive pas à récupérer la météo.";
+                    answers.Add("Je n'arrive pas à récupérer la météo.");
                 }
             }
 
-            return answer;
+            return answers;
+        }
+
+        public void InsideLoop(LoriaAction loriaAction, System.IO.FileInfo databaseFile)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -40,12 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Loria\Debug\ILoggable.cs" />
     <Compile Include="src\Loria\LoriaCore.cs" />
+    <Compile Include="src\Loria\Module\CoreModules\LoriaCoreModule.cs" />
+    <Compile Include="src\Loria\Module\LoriaAction.cs" />
+    <Compile Include="src\Loria\Module\LoriaAnswer.cs" />
     <Compile Include="src\Loria\Module\LoriaModule.cs" />
     <Compile Include="src\Loria\Module\LoriaModuleLoader.cs" />
     <Compile Include="src\Loria\Speech\LoriaRecognizer.cs" />
     <Compile Include="src\Loria\Text\LoriaVocalizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
