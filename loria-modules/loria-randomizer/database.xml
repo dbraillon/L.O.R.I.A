@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<database>
+  <questions>
+    <question answered="False" delayed="False">diner</question>
+  </questions>
+  <diners>
+    <diner>Steak et petit pois</diner>
+    <diner>Tomate mozzarella</diner>
+  </diners>
+</database>

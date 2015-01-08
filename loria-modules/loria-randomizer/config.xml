@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module name="Module aléatoire.">
+  <actions>
+    <action id="diner" name="Diner" type="OnDemand">
+      <phrases>
+        <phrase>Loria on mange quoi</phrase>
+      </phrases>
+    </action>
+  </actions>
+</module>

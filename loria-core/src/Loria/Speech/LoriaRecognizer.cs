@@ -4,6 +4,7 @@ using Loria.Text;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Speech.Recognition;
@@ -32,7 +33,7 @@ namespace Loria.Speech
             Phrases = new List<string>();
 
             if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Start SpeechRecognitionEngine to default input audio device and set language to fr-FR.");
-            RecognitionEngine = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("fr-FR"));
+            RecognitionEngine = new SpeechRecognitionEngine(new CultureInfo("fr-FR"));
             RecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(SpeechRecognized);
             RecognitionEngine.SetInputToDefaultAudioDevice();
         }
@@ -48,6 +49,7 @@ namespace Loria.Speech
             choices.Add(phrases.ToArray());
 
             GrammarBuilder grammarBuilder = new GrammarBuilder();
+            grammarBuilder.Culture = new CultureInfo("fr-FR");
             grammarBuilder.Append(choices);
 
             Grammar grammar = new Grammar(grammarBuilder);
@@ -116,7 +118,7 @@ namespace Loria.Speech
         {
             if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Choice recognized '{0}' with confidence value of '{1}'.", e.Result.Text, e.Result.Confidence);
             
-            if (e.Result.Confidence >= 0.5f)
+            if (e.Result.Confidence >= 0.3f)
             {
                 if (LoriaSpeechRecognized != null) LoriaSpeechRecognized(e.Result.Text);
             }
