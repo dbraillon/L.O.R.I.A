@@ -20,44 +20,131 @@ namespace Loria.Module.Weather
         public IEnumerable<string> OnDemand(LoriaAction loriaAction, System.IO.FileInfo databaseFile)
         {
             List<string> answers = new List<string>();
+            
+            #region Load additional attributes
 
-            if (loriaAction.Name == "Weather")
+            string city = "Grenoble";
+            string country = "fr";
+            string lang = "fr";
+
+            try
             {
-                try
+                city = loriaAction.AdditionalAttributes.First(a => a.Key == "city").Value;
+            }
+            catch { }
+
+            try
+            {
+                country = loriaAction.AdditionalAttributes.First(a => a.Key == "country").Value;
+            }
+            catch { }
+
+            try
+            {
+                lang = loriaAction.AdditionalAttributes.First(a => a.Key == "lang").Value;
+            }
+            catch { }
+
+            #endregion
+
+            try
+            {
+                if (loriaAction.Id == "weather-now")
                 {
-                    using (HttpClient httpClient = new HttpClient())
-                    {
-                        string httpResult = httpClient.GetStringAsync("http://api.openweathermap.org/data/2.5/weather?q=Grenoble,fr&mode=xml&lang=fr").Result;
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var result = openWeatherMap.GetWeatherNow(city, lang, country);
 
-                        XmlDocument xmlResult = new XmlDocument();
-                        xmlResult.LoadXml(httpResult);
-
-                        XmlNode temperatureNode = xmlResult.SelectSingleNode("//temperature");
-                        XmlAttribute temperatureValueAttribute = temperatureNode != null ? temperatureNode.Attributes["value"] : null;
-
-                        XmlNode weatherNode = xmlResult.SelectSingleNode("//weather");
-                        XmlAttribute weatherValueAttribute = weatherNode != null ? weatherNode.Attributes["value"] : null;
-
-                        if (temperatureValueAttribute != null && weatherValueAttribute != null)
-                        {
-                            WeatherResponse weatherResponse = new WeatherResponse()
-                            {
-                                Temperature = double.Parse(temperatureValueAttribute.Value.Replace('.', ',')),
-                                Weather = weatherValueAttribute.Value
-                            };
-
-                            answers.Add(weatherResponse.ToString());
-                        }
-                        else
-                        {
-                            throw new ArgumentException("Can't read weather response.");
-                        }
-                    }
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", result.Weather, result.Temperature));
                 }
-                catch (Exception)
+
+                if (loriaAction.Id == "weather-tomorow")
                 {
-                    answers.Add("Je n'arrive pas à récupérer la météo.");
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[1].Weather, results[1].Temperature));
                 }
+
+                if (loriaAction.Id == "weather-monday")
+                {
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    DateTime next = DateTime.Now.Next(DayOfWeek.Monday);
+                    int day = (int)(next - DateTime.Now).TotalDays;
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[day].Weather, results[day].Temperature));
+                }
+
+                if (loriaAction.Id == "weather-tuesday")
+                {
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    DateTime next = DateTime.Now.Next(DayOfWeek.Tuesday);
+                    int day = (int)(next - DateTime.Now).TotalDays;
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[day].Weather, results[day].Temperature));
+                }
+
+                if (loriaAction.Id == "weather-wednesday")
+                {
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    DateTime next = DateTime.Now.Next(DayOfWeek.Wednesday);
+                    int day = (int)(next - DateTime.Now).TotalDays;
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[day].Weather, results[day].Temperature));
+                }
+
+                if (loriaAction.Id == "weather-thursday")
+                {
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    DateTime next = DateTime.Now.Next(DayOfWeek.Thursday);
+                    int day = (int)(next - DateTime.Now).TotalDays;
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[day].Weather, results[day].Temperature));
+                }
+
+                if (loriaAction.Id == "weather-friday")
+                {
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    DateTime next = DateTime.Now.Next(DayOfWeek.Friday);
+                    int day = (int)(next - DateTime.Now).TotalDays;
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[day].Weather, results[day].Temperature));
+                }
+
+                if (loriaAction.Id == "weather-saturday")
+                {
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    DateTime next = DateTime.Now.Next(DayOfWeek.Saturday);
+                    int day = (int)(next - DateTime.Now).TotalDays;
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[day].Weather, results[day].Temperature));
+                }
+
+                if (loriaAction.Id == "weather-sunday")
+                {
+                    OpenWeatherMap openWeatherMap = new OpenWeatherMap();
+                    var results = openWeatherMap.GetWeatherForecast(city, lang, country);
+
+                    DateTime next = DateTime.Now.Next(DayOfWeek.Sunday);
+                    int day = (int)(next - DateTime.Now).TotalDays;
+
+                    answers.Add(string.Format("Le temps est {0} avec une température de {1} degrés.", results[day].Weather, results[day].Temperature));
+                }
+            }
+            catch (Exception)
+            {
+                answers.Add("Je n'arrive pas à récupérer la météo.");
             }
 
             return answers;
@@ -69,14 +156,15 @@ namespace Loria.Module.Weather
         }
     }
 
-    public class WeatherResponse
+    public static class MyDateTime
     {
-        public double Temperature { get; set; }
-        public string Weather { get; set; }
-
-        public override string ToString()
+        public static DateTime Next(this DateTime from, DayOfWeek dayOfWeek)
         {
-            return string.Format("Le temps sera {0} avec une températeure de {1} degrés.", Weather, Temperature - 273.15);
+            int start = (int)from.DayOfWeek;
+            int target = (int)dayOfWeek;
+            if (target < start)
+                target += 7;
+            return from.AddDays(target - start);
         }
     }
 }

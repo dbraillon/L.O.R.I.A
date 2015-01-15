@@ -1,10 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <module name="Module de météo.">
   <actions>
-    <action id="weather" name="Weather" type="OnDemand">
+    <action id="weather-now" name="Weather now" type="OnDemand" city="Grenoble" country="fr" lang="fr">
       <phrases>
         <phrase>Loria quelle temps il fait aujourd'hui</phrase>
         <phrase>Loria quelle temps fait-il aujourd'hui</phrase>
+      </phrases>
+    </action>
+    <action id="weather-tomorow" name="Weather tomorow" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait demain</phrase>
+        <phrase>Loria quelle temps fait-il demain</phrase>
+      </phrases>
+    </action>
+    <action id="weather-monday" name="Weather monday" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait lundi</phrase>
+      </phrases>
+    </action>
+    <action id="weather-tuesday" name="Weather tuesday" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait mardi</phrase>
+      </phrases>
+    </action>
+    <action id="weather-wednesday" name="Weather wednesday" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait mercredi</phrase>
+      </phrases>
+    </action>
+    <action id="weather-thursday" name="Weather thursday" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait jeudi</phrase>
+      </phrases>
+    </action>
+    <action id="weather-friday" name="Weather friday" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait vendredi</phrase>
+      </phrases>
+    </action>
+    <action id="weather-saturday" name="Weather saturday" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait samedi</phrase>
+      </phrases>
+    </action>
+    <action id="weather-sunday" name="Weather sunday" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait dimanche</phrase>
+      </phrases>
+    </action>
+    <action id="weather-weekend" name="Weather weekend" type="OnDemand">
+      <phrases>
+        <phrase>Loria quelle temps il fait ce week-end</phrase>
       </phrases>
     </action>
   </actions>

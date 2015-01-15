@@ -65,14 +65,6 @@ namespace Loria.Speech
             return Phrases;
         }
 
-        public void Dispose()
-        {
-            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Stop listening and dispose SpeechRecognitionEngine.");
-            
-            StopListening();
-            RecognitionEngine.Dispose();
-        }
-
         public void StartListening()
         {
             if (!IsRunning)
@@ -98,6 +90,27 @@ namespace Loria.Speech
         // Recognizer thread
         private void Listen()
         {
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Ready to listen.");
+
+            RecognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+
+            try
+            {
+                while (RecognizerThread.ThreadState == System.Threading.ThreadState.Running)
+                {
+                    Thread.Sleep(1000);
+                }
+            }
+            catch (ThreadInterruptedException tie)
+            {
+                if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Thread has been aborted.");
+            }
+            catch (Exception e)
+            {
+                if (LogManager != null) LogManager.WriteLog(LogType.ERROR, string.Format("Error: {0}{1}", Environment.NewLine, e.ToString()));
+            }
+            
+            /*
             while (RecognizerThread.ThreadState == System.Threading.ThreadState.Running)
             {
                 try
@@ -112,6 +125,7 @@ namespace Loria.Speech
                     return;
                 }
             }
+            */
         }
 
         private void SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -122,6 +136,14 @@ namespace Loria.Speech
             {
                 if (LoriaSpeechRecognized != null) LoriaSpeechRecognized(e.Result.Text);
             }
+        }
+
+        public void Dispose()
+        {
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Stop listening and dispose SpeechRecognitionEngine.");
+
+            StopListening();
+            RecognitionEngine.Dispose();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿
-using Loria.Core.Debug;
+﻿using Loria.Core.Debug;
+
 namespace Loria.Console
 {
     class Program : ILoggable

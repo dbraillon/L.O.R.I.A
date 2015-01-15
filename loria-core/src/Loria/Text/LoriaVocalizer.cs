@@ -23,16 +23,16 @@ namespace Loria.Text
             Synthesizer.SelectVoice("ScanSoft Virginie_Dri40_16kHz");
         }
 
-        public void Dispose()
-        {
-            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Dispose SpeechSynthesizer.");
-            Synthesizer.Dispose();
-        }
-
         public void Speech(string textToSpeech)
         {
             if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Speech '{0}'.", textToSpeech);
             Synthesizer.Speak(textToSpeech);
+        }
+
+        public void Dispose()
+        {
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Dispose SpeechSynthesizer.");
+            Synthesizer.Dispose();
         }
     }
 }
