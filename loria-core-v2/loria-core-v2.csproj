@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3006D784-777B-4960-B956-525D4DDEE594}</ProjectGuid>
+    <ProjectGuid>{D3B171CA-1370-4B94-840A-D3B46E106E0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Loria.Core</RootNamespace>
@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,37 +31,37 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Loria\Debug\ILoggable.cs" />
-    <Compile Include="Loria\LoriaCore.cs" />
-    <Compile Include="Loria\Module\Config\Models\LoriaActionModel.cs" />
-    <Compile Include="Loria\Module\Config\Models\LorialModuleModel.cs" />
-    <Compile Include="Loria\Module\CoreModules\LoriaCoreModule.cs" />
-    <Compile Include="Loria\Module\LoriaActions\LoriaAction.cs" />
-    <Compile Include="Loria\Module\LoriaActions\LoriaActionAsync.cs" />
-    <Compile Include="Loria\Module\LoriaActions\LoriaActionBackground.cs" />
-    <Compile Include="Loria\Module\LoriaActions\LoriaActionOnDemand.cs" />
-    <Compile Include="Loria\Module\LoriaActions\LoriaActionOnDemandCore.cs" />
-    <Compile Include="Loria\Module\LoriaActions\LoriaActionPlanned.cs" />
-    <Compile Include="Loria\Module\LoriaAnswer.cs" />
-    <Compile Include="Loria\Module\Config\LoriaConfig.cs" />
-    <Compile Include="Loria\Module\LoriaModule.cs" />
-    <Compile Include="Loria\Module\LoriaModuleLoader.cs" />
-    <Compile Include="Loria\Speech\LoriaRecognizer.cs" />
-    <Compile Include="Loria\Text\LoriaVocalizer.cs" />
+    <Compile Include="Abilities\Ability.cs" />
+    <Compile Include="Abilities\Innate\SelfIntroductionAbility.cs" />
+    <Compile Include="Activities\Activity.cs" />
+    <Compile Include="Activities\OnDemandAction.cs" />
+    <Compile Include="Brain.cs" />
+    <Compile Include="IBrain.cs" />
+    <Compile Include="Loria.cs" />
+    <Compile Include="Senses\HearingSense.cs" />
+    <Compile Include="Senses\ISense.cs" />
+    <Compile Include="Speeches\ISpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Senses\SmellSense.cs" />
+    <Compile Include="Speeches\MouthSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="database.xml">
+      <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

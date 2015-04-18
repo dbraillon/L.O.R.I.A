@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-ui", "loria-ui\loria-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-randomizer", "loria-modules\loria-randomizer\loria-randomizer.csproj", "{8470A7AA-99D2-4EB0-9490-829D3A3B12F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-core-v2", "loria-core-v2\loria-core-v2.csproj", "{D3B171CA-1370-4B94-840A-D3B46E106E0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{8470A7AA-99D2-4EB0-9490-829D3A3B12F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8470A7AA-99D2-4EB0-9490-829D3A3B12F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8470A7AA-99D2-4EB0-9490-829D3A3B12F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3B171CA-1370-4B94-840A-D3B46E106E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3B171CA-1370-4B94-840A-D3B46E106E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3B171CA-1370-4B94-840A-D3B46E106E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3B171CA-1370-4B94-840A-D3B46E106E0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

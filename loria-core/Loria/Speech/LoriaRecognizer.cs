@@ -17,7 +17,6 @@ namespace Loria.Speech
     public class LoriaRecognizer
     {
         private ILoggable LogManager;
-        private Thread RecognizerThread;
         private SpeechRecognitionEngine RecognitionEngine;
         private List<string> Phrases;
 
@@ -28,7 +27,6 @@ namespace Loria.Speech
         {
             LogManager = logManager;
 
-            RecognizerThread = new Thread(Listen); 
             IsRunning = false;
             Phrases = new List<string>();
 
@@ -65,51 +63,12 @@ namespace Loria.Speech
             return Phrases;
         }
 
-        public void StartListening()
-        {
-            if (!IsRunning)
-            {
-                if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Start listening.");
-                
-                RecognizerThread.Start();
-                IsRunning = true;
-            }
-        }
-
-        public void StopListening()
-        {
-            if (IsRunning)
-            {
-                if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Stop listening.");
-
-                RecognizerThread.Interrupt();
-                IsRunning = false;
-            }
-        }
-
-        // Recognizer thread
-        private void Listen()
+        public void StartListen()
         {
             if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Ready to listen.");
 
             RecognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
 
-            try
-            {
-                while (RecognizerThread.ThreadState == System.Threading.ThreadState.Running)
-                {
-                    Thread.Sleep(1000);
-                }
-            }
-            catch (ThreadInterruptedException tie)
-            {
-                if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Thread has been aborted.");
-            }
-            catch (Exception e)
-            {
-                if (LogManager != null) LogManager.WriteLog(LogType.ERROR, string.Format("Error: {0}{1}", Environment.NewLine, e.ToString()));
-            }
-            
             /*
             while (RecognizerThread.ThreadState == System.Threading.ThreadState.Running)
             {
@@ -128,6 +87,13 @@ namespace Loria.Speech
             */
         }
 
+        public void StopListen()
+        {
+            if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Stop listening.");
+
+            RecognitionEngine.RecognizeAsyncCancel();
+        }
+
         private void SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Choice recognized '{0}' with confidence value of '{1}'.", e.Result.Text, e.Result.Confidence);
@@ -142,7 +108,7 @@ namespace Loria.Speech
         {
             if (LogManager != null) LogManager.WriteLog(LogType.INFO, "Stop listening and dispose SpeechRecognitionEngine.");
 
-            StopListening();
+            StopListen();
             RecognitionEngine.Dispose();
         }
     }

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module>
+  <action>
+    <sense type="hearing">Coucou, ça va ?</sense>
+    <sense type="smell">say_hello</sense>
+  </action>
+</module>

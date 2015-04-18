@@ -1,4 +1,5 @@
 ﻿using Loria.Core.Debug;
+using Loria.Core.Loria.Module.LoriaActions;
 using Loria.Core.src.Loria.Module.CoreModules;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,9 @@ namespace Loria.Module
 
         public IEnumerable<string> GetPhrases()
         {
-            return LoriaModules.SelectMany(m => m.LoriaActions).SelectMany(a => a.Phrases);
+            var loriaActionOnDemands = LoriaModules.SelectMany(m => m.LoriaActions).Where(a => a is LoriaActionOnDemand).Cast<LoriaActionOnDemand>();
+
+            return loriaActionOnDemands.SelectMany(a => a.Phrases);
         }
     }
 }

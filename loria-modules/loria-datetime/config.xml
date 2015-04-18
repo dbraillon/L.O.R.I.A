@@ -28,5 +28,17 @@
         <phrase>Quelle date on est Loria</phrase>
       </phrases>
     </action>
+    <action id="Alarm" name="Alarm" type="OnTime">
+      <phrases>
+        <phrase>Loria, demain reveille-moi à 6 heures.</phrase>
+        <phrase>Loria, demain reveille-moi à 6 heures 30.</phrase>
+        <phrase>Loria, demain reveille-moi à 7 heures.</phrase>
+        <phrase>Loria, demain reveille-moi à 7 heures 30.</phrase>
+        <phrase>Loria, demain reveille-moi à 8 heures.</phrase>
+        <phrase>Loria, demain reveille-moi à 8 heures 30.</phrase>
+        <phrase>Loria, demain reveille-moi à 9 heures.</phrase>
+        <phrase>Loria, demain reveille-moi à 9 heures 30.</phrase>
+      </phrases>
+    </action>
   </actions>
 </module>

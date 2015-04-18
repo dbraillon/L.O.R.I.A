@@ -1,32 +1,30 @@
-﻿using Loria.Module;
+﻿using Loria.Core.Debug;
+using Loria.Core.src.Loria.Module.CoreModules;
+using Loria.Module;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
-namespace Loria.Core.src.Loria.Module.CoreModules
+namespace Loria.Core.Loria.Module.LoriaActions
 {
-    public enum CoreLoriaModuleType
+    public class LoriaActionOnDemandCore : LoriaActionOnDemand
     {
-        VERSION, RELOAD_MODULE, LIST_MODULE, SLEEP, WAKEUP, NEWS
-    }
-
-    public class LoriaCoreModule : LoriaModule
-    {
-        public LoriaCoreModule()
+        public LoriaActionOnDemandCore(LoriaModule loriaModule, XmlNode actionNode, ILoggable logManager = null)
+            : base(loriaModule, actionNode, logManager)
         {
-            ConfigFile = new FileInfo("config.xml");
+
         }
 
-        public override IEnumerable<LoriaAnswer> DoAction(LoriaCore loriaCore, LoriaAction loriaAction)
+        public override IEnumerable<LoriaAnswer> DoAction(LoriaCore loriaCore)
         {
             List<LoriaAnswer> loriaAnswers = new List<LoriaAnswer>();
 
-            if (loriaAction.Id.ToLower() == CoreLoriaModuleType.VERSION.ToString().ToLower())
+            if (Id.ToLower() == CoreLoriaModuleType.VERSION.ToString().ToLower())
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
@@ -35,29 +33,29 @@ namespace Loria.Core.src.Loria.Module.CoreModules
                 loriaAnswers.Add(new LoriaAnswer(true, true, versionPhrase));
             }
 
-            if (loriaAction.Id.ToLower() == CoreLoriaModuleType.RELOAD_MODULE.ToString().ToLower())
+            if (Id.ToLower() == CoreLoriaModuleType.RELOAD_MODULE.ToString().ToLower())
             {
                 loriaCore.ReloadModule();
             }
 
-            if (loriaAction.Id.ToLower() == CoreLoriaModuleType.LIST_MODULE.ToString().ToLower())
+            if (Id.ToLower() == CoreLoriaModuleType.LIST_MODULE.ToString().ToLower())
             {
                 string moduleList = string.Join(", ", loriaCore.ModuleLoader.LoriaModules.Select(m => m.ModuleName));
 
                 loriaAnswers.Add(new LoriaAnswer(true, true, string.Format("J'ai {0} modules chargés. {1}.", loriaCore.ModuleLoader.LoriaModules.Count, moduleList)));
             }
 
-            if (loriaAction.Id.ToLower() == CoreLoriaModuleType.SLEEP.ToString().ToLower())
+            if (Id.ToLower() == CoreLoriaModuleType.SLEEP.ToString().ToLower())
             {
                 loriaCore.GoToSleep();
             }
 
-            if (loriaAction.Id.ToLower() == CoreLoriaModuleType.WAKEUP.ToString().ToLower())
+            if (Id.ToLower() == CoreLoriaModuleType.WAKEUP.ToString().ToLower())
             {
                 loriaCore.WakeUp();
             }
 
-            if (loriaAction.Id.ToLower() == CoreLoriaModuleType.NEWS.ToString().ToLower())
+            if (Id.ToLower() == CoreLoriaModuleType.NEWS.ToString().ToLower())
             {
                 foreach (LoriaModule loriaModule in loriaCore.ModuleLoader.LoriaModules)
                 {
