@@ -1,4 +1,5 @@
 ﻿using Loria.Core.Abilities;
+using Loria.Core.Abilities.Innate;
 using Loria.Core.Actions;
 using Loria.Core.Activities;
 using Loria.Core.Senses;
@@ -13,25 +14,17 @@ namespace Loria.Core
 {
     public class Brain : IBrain
     {
-        private IList<ISense> Senses;
-        private IList<Ability> Abilities;
-        private IList<ISpeech> Speeches;
-
-        public Brain(IList<ISense> senses, IList<Ability> abilities, IList<ISpeech> speeches)
+        public Brain()
         {
-            Senses = senses;
-            Abilities = abilities;
-            Speeches = speeches;
-
-            foreach (Ability ability in Abilities)
+            foreach (LoriaAbility ability in LoriaAbilities.GetAbilities())
             {
-                foreach (ISense sense in Senses)
+                foreach (ISense sense in LoriaSenses.GetSenses())
                 {
                     sense.AddStimulus(ability.Stimulus.ToArray());
                 }
             }
 
-            foreach (ISense sense in Senses)
+            foreach (ISense sense in LoriaSenses.GetSenses())
             {
                 sense.StimulusRecognized += Sense_StimulusRecognized;
                 sense.StartSensing();
@@ -42,8 +35,8 @@ namespace Loria.Core
 
         private void Sense_StimulusRecognized(string stimulus)
         {
-            List<Ability> stimulatedAbilities = Abilities.Where(a => a.Stimulus.Contains(stimulus)).ToList();
-            foreach (Ability stimulatedAbility in stimulatedAbilities)
+            List<LoriaAbility> stimulatedAbilities = LoriaInnateAbilities.GetInnateAbilities().Where(a => a.Stimulus.Contains(stimulus)).ToList();
+            foreach (LoriaAbility stimulatedAbility in stimulatedAbilities)
             {
                 stimulatedAbility.Activity.MainLaunch();
             } 

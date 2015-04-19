@@ -11,6 +11,19 @@ namespace Loria.Core.Senses
 {
     public class SmellSense : ISense
     {
+        private static SmellSense Instance;
+        public static SmellSense GetInstance()
+        {
+            if (Instance == null)
+            {
+                Instance = new SmellSense();
+            }
+
+            return Instance;
+        }
+
+
+
         private const string SightDirectoryKey = "SightDirectoryKey";
         
         private List<string> StimulusLoaded;

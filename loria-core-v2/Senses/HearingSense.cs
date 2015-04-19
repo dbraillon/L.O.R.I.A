@@ -11,12 +11,23 @@ namespace Loria.Core.Senses
 {
     public class HearingSense : ISense
     {
+        private static HearingSense Instance;
+        public static HearingSense GetInstance()
+        {
+            if (Instance == null)
+            {
+                Instance = new HearingSense();
+            }
+
+            return Instance;
+        }
+
         private const string SenseCulture = "fr-FR";
         private SpeechRecognitionEngine RecognitionEngine;
         private List<string> Stimulus;
         private bool IsRunning;
 
-        public HearingSense()
+        private HearingSense()
         {
             RecognitionEngine = new SpeechRecognitionEngine(new CultureInfo(SenseCulture));
             RecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(SpeechRecognized);

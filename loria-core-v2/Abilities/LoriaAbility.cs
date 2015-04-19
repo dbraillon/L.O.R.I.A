@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace Loria.Core.Abilities
 {
-    public class Ability
+    public class LoriaAbility
     {
         public IList<string> Stimulus { get; set; }
         public Activity Activity { get; set; }
+        public string Description { get; set; }
     }
 }

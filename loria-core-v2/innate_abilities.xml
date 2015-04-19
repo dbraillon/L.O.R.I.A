@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<abilities>
+  <ability id="self_introduction">
+    <stimulus>Loria, présente toi.</stimulus>
+    <stimulus>Présente toi Loria.</stimulus>
+  </ability>
+  <ability id="core_version">
+    <stimulus>Loria, donne moi ta version.</stimulus>
+    <stimulus>Donne moi ta version Loria.</stimulus>
+  </ability>
+  <ability id="list_abilities">
+    <stimulus>Loria, dis moi ce que tu sais faire.</stimulus>
+    <stimulus>Dis moi ce que tu sais faire Loria.</stimulus>
+  </ability>
+</abilities>

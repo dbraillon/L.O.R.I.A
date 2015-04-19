@@ -24,26 +24,11 @@ namespace Loria.Core
         }
 
 
-        private IList<ISense> Senses;
-        private IList<Ability> Abilities;
-        private IList<ISpeech> Speeches; 
         private IBrain Brain;
         
         private LoriaSoul() 
         {
-            Senses = new List<ISense>();
-            Senses.Add(new HearingSense());
-            //Senses.Add(new SmellSense());
-
-            SetInnateAbility();
-
-            Brain = new Brain(Senses, Abilities, Speeches);
-        }
-
-        private void SetInnateAbility()
-        {
-            Abilities = new List<Ability>();
-            Abilities.Add(new SelfIntroductionAbility());
+            Brain = new Brain();
         }
     }
 }

@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 
 namespace Loria.Core.Abilities.Innate
 {
-    public class SelfIntroductionAbility : Ability
+    public class SelfIntroductionAbility : LoriaAbility
     {
+        private const string AbilityId = "self_introduction";
+
         public SelfIntroductionAbility()
         {
-            Stimulus = new List<string>();
-            Stimulus.Add("Loria, présente toi.");
-            Stimulus.Add("Présente toi Loria.");
-
+            Stimulus = LoriaInnateStimulusLoader.LoadStimulus(AbilityId);
+            
             Activity = new Activity();
             Activity.OnMainLaunch += Activity_OnMainLaunch;
+
+            Description = "me présenter";
         }
 
         public void Activity_OnMainLaunch()
