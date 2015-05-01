@@ -1,11 +1,8 @@
-﻿using Loria.Core.Abilities;
-using Loria.Core.Abilities.Innate;
-using Loria.Core.Actions;
-using Loria.Core.Activities;
-using Loria.Core.Senses;
+﻿using Loria.Core.Senses;
 using Loria.Core.Speeches;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +13,19 @@ namespace Loria.Core
     {
         private static LoriaSoul Soul;
 
-        public static LoriaSoul Live()
+        public static LoriaSoul Live(EventLog eventLog = null)
         {
-            if (Soul == null) Soul = new LoriaSoul();
+            if (Soul == null) Soul = new LoriaSoul(eventLog);
 
             return Soul;
         }
 
 
         private IBrain Brain;
-        
-        private LoriaSoul() 
+
+        private LoriaSoul(EventLog eventLog = null) 
         {
-            Brain = new Brain();
+            Brain = new Brain(eventLog);
         }
     }
 }

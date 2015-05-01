@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Loria.Dal.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,11 @@ namespace Loria.Core.Senses
 
     public interface ISense
     {
+        Sense GetSense();
         void StartSensing();
         void StopSensing();
         void AddStimulus(params string[] stimulus);
+        void ClearStimulus();
 
         event StimulusRecognizedEventHandler StimulusRecognized;
     }

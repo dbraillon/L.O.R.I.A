@@ -1,11 +1,11 @@
-﻿using Loria.Core.Abilities;
-using Loria.Core.Abilities.Innate;
-using Loria.Core.Actions;
-using Loria.Core.Activities;
-using Loria.Core.Senses;
+﻿using Loria.Core.Senses;
+using Loria.Core.Skills;
 using Loria.Core.Speeches;
+using Loria.Dal.Entities;
+using Loria.Dal.Tools;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,32 +14,46 @@ namespace Loria.Core
 {
     public class Brain : IBrain
     {
-        public Brain()
+        private EventLog EventLog;
+
+        public Brain(EventLog eventLog = null)
         {
-            foreach (LoriaAbility ability in LoriaAbilities.GetAbilities())
-            {
-                foreach (ISense sense in LoriaSenses.GetSenses())
-                {
-                    sense.AddStimulus(ability.Stimulus.ToArray());
-                }
-            }
+            EventLog = eventLog;
 
-            foreach (ISense sense in LoriaSenses.GetSenses())
+            try
             {
-                sense.StimulusRecognized += Sense_StimulusRecognized;
-                sense.StartSensing();
-            }
+                EventLog.WriteEntry("Configuring Loria hearing sense...");
+                HearingSense.GetInstance().AddStimulus(LoriaTool.GetAllStimulus(senses: Sense.Hearing, eventLog: EventLog));
+                HearingSense.GetInstance().StimulusRecognized += Sense_StimulusRecognized;
+                HearingSense.GetInstance().StartSensing();
+                EventLog.WriteEntry("Loria hearing sense configured...");
 
-            MouthSpeech.GetInstance().Speech("Bonjour.");
+                MouthSpeech.GetInstance().Speech("Bonjour.");
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(string.Format("Can't talk {0}{1}", Environment.NewLine, e.ToString()), EventLogEntryType.Error);
+            }
         }
 
-        private void Sense_StimulusRecognized(string stimulus)
+        private void Sense_StimulusRecognized(string stimuli)
         {
-            List<LoriaAbility> stimulatedAbilities = LoriaInnateAbilities.GetInnateAbilities().Where(a => a.Stimulus.Contains(stimulus)).ToList();
-            foreach (LoriaAbility stimulatedAbility in stimulatedAbilities)
+            EventLog.WriteEntry(string.Concat("Loria recognized something : ", stimuli));
+
+            Ability stimulatedAbility = LoriaTool.GetAbility(stimuli);
+
+            if (stimulatedAbility != null)
             {
-                stimulatedAbility.Activity.MainLaunch();
-            } 
+                foreach (Skill skill in stimulatedAbility.Skills)
+                {
+                    SkillAction skillAction = SkillLoader.GetSkillAction(skill);
+
+                    if (skillAction != null)
+                    {
+                        skillAction.FirstLaunch();
+                    }
+                }
+            }
         }
     }
 }

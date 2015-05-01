@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-modules-core", "loria
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-weather", "loria-modules\loria-weather\loria-weather.csproj", "{3EF53C2D-4AA0-479B-A0A3-40A88187C057}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-website", "loria-website\loria-website.csproj", "{05F25554-251E-41FC-B6A4-08B3FA6517A6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-launcher", "loria-modules\loria-launcher\loria-launcher.csproj", "{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-series", "loria-modules\loria-series\loria-series.csproj", "{82565403-C2CF-44DA-B8FA-45EA0AB137C3}"
@@ -25,7 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-ui", "loria-ui\loria-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-randomizer", "loria-modules\loria-randomizer\loria-randomizer.csproj", "{8470A7AA-99D2-4EB0-9490-829D3A3B12F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loria-core-v2", "loria-core-v2\loria-core-v2.csproj", "{D3B171CA-1370-4B94-840A-D3B46E106E0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Core", "loria-core-v2\Loria.Core.csproj", "{D3B171CA-1370-4B94-840A-D3B46E106E0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Configuration", "Loria.Configuration\Loria.Configuration.csproj", "{9C313879-9024-49A5-8F88-B3CD938B9959}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Dal", "Loria.Dal\Loria.Dal.csproj", "{1EEB1CFA-EBB9-45DB-8649-F7DFB43F5FFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Service", "Loria.Service\Loria.Service.csproj", "{8572A2F1-F737-490C-A0D9-101523CFA2DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +57,6 @@ Global
 		{3EF53C2D-4AA0-479B-A0A3-40A88187C057}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF53C2D-4AA0-479B-A0A3-40A88187C057}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF53C2D-4AA0-479B-A0A3-40A88187C057}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05F25554-251E-41FC-B6A4-08B3FA6517A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F23764B-5184-49DB-ACC0-D66AAFE6A0A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,6 +77,18 @@ Global
 		{D3B171CA-1370-4B94-840A-D3B46E106E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3B171CA-1370-4B94-840A-D3B46E106E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3B171CA-1370-4B94-840A-D3B46E106E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C313879-9024-49A5-8F88-B3CD938B9959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C313879-9024-49A5-8F88-B3CD938B9959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C313879-9024-49A5-8F88-B3CD938B9959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C313879-9024-49A5-8F88-B3CD938B9959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EEB1CFA-EBB9-45DB-8649-F7DFB43F5FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EEB1CFA-EBB9-45DB-8649-F7DFB43F5FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EEB1CFA-EBB9-45DB-8649-F7DFB43F5FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EEB1CFA-EBB9-45DB-8649-F7DFB43F5FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8572A2F1-F737-490C-A0D9-101523CFA2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8572A2F1-F737-490C-A0D9-101523CFA2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8572A2F1-F737-490C-A0D9-101523CFA2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8572A2F1-F737-490C-A0D9-101523CFA2DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

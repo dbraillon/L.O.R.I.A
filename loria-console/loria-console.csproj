@@ -68,7 +68,15 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
@@ -84,11 +92,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="loria-console_TemporaryKey.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\loria-core-v2\loria-core-v2.csproj">
+    <ProjectReference Include="..\loria-core-v2\Loria.Core.csproj">
       <Project>{d3b171ca-1370-4b94-840a-d3b46e106e0e}</Project>
-      <Name>loria-core-v2</Name>
+      <Name>Loria.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

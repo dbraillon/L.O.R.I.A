@@ -12,4 +12,16 @@
     <stimulus>Loria, dis moi ce que tu sais faire.</stimulus>
     <stimulus>Dis moi ce que tu sais faire Loria.</stimulus>
   </ability>
+  <ability id="sleep">
+    <stimulus>Loria, va dormir.</stimulus>
+    <stimulus>Va dormir Loria.</stimulus>
+  </ability>
+  <ability id="wakeup">
+    <stimulus>Loria, réveille toi.</stimulus>
+    <stimulus>Réveille toi Loria.</stimulus>
+  </ability>
+  <ability id="reload_abilities">
+    <stimulus>Loria, recharche tes abilités.</stimulus>
+    <stimulus>Recharge tes abilités Loria.</stimulus>
+  </ability>
 </abilities>

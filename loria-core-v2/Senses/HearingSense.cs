@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Loria.Dal.Entities;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -36,6 +37,11 @@ namespace Loria.Core.Senses
             Stimulus = new List<string>();
         }
 
+        public Sense GetSense()
+        {
+            return Sense.Hearing;
+        }
+
         public void AddStimulus(params string[] stimulus)
         {
             Stimulus.AddRange(stimulus);
@@ -49,6 +55,12 @@ namespace Loria.Core.Senses
 
             RecognitionEngine.UnloadAllGrammars();
             RecognitionEngine.LoadGrammar(new Grammar(grammarBuilder));
+        }
+
+        public void ClearStimulus()
+        {
+            Stimulus.Clear();
+            RecognitionEngine.UnloadAllGrammars();
         }
 
         public void StartSensing()
