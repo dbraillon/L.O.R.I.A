@@ -29,7 +29,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stimuli stimuli = await db.Stimulus.FindAsync(id);
+            Trigger stimuli = await db.Stimulus.FindAsync(id);
             if (stimuli == null)
             {
                 return HttpNotFound();
@@ -48,7 +48,7 @@ namespace Loria.Configuration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Value")] Stimuli stimuli)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Value")] Trigger stimuli)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stimuli stimuli = await db.Stimulus.FindAsync(id);
+            Trigger stimuli = await db.Stimulus.FindAsync(id);
             if (stimuli == null)
             {
                 return HttpNotFound();
@@ -80,7 +80,7 @@ namespace Loria.Configuration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Value")] Stimuli stimuli)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Value")] Trigger stimuli)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stimuli stimuli = await db.Stimulus.FindAsync(id);
+            Trigger stimuli = await db.Stimulus.FindAsync(id);
             if (stimuli == null)
             {
                 return HttpNotFound();
@@ -111,7 +111,7 @@ namespace Loria.Configuration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Stimuli stimuli = await db.Stimulus.FindAsync(id);
+            Trigger stimuli = await db.Stimulus.FindAsync(id);
             db.Stimulus.Remove(stimuli);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

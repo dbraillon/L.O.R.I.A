@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Loria.Dal
+namespace Loria.Dal.Enums
 {
-    public class RepositoryContext
+    public enum EItemType
     {
-
+        String
     }
 }

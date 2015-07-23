@@ -31,7 +31,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ability ability = await db.Abilities.FindAsync(id);
+            Receipe ability = await db.Abilities.FindAsync(id);
             if (ability == null)
             {
                 return HttpNotFound();
@@ -63,7 +63,7 @@ namespace Loria.Configuration.Controllers
                     senses = senses | (Sense)Enum.Parse(typeof(Sense), senseString);
                 }
 
-                Ability ability = new Ability()
+                Receipe ability = new Receipe()
                 {
                     Name = model.Name,
                     Type = model.Type,
@@ -89,7 +89,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ability ability = await db.Abilities.FindAsync(id);
+            Receipe ability = await db.Abilities.FindAsync(id);
             if (ability == null)
             {
                 return HttpNotFound();
@@ -102,7 +102,7 @@ namespace Loria.Configuration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Type,Senses")] Ability ability)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Type,Senses")] Receipe ability)
         {
             if (ModelState.IsValid)
             {
@@ -120,7 +120,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ability ability = await db.Abilities.FindAsync(id);
+            Receipe ability = await db.Abilities.FindAsync(id);
             if (ability == null)
             {
                 return HttpNotFound();
@@ -133,7 +133,7 @@ namespace Loria.Configuration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Ability ability = await db.Abilities.FindAsync(id);
+            Receipe ability = await db.Abilities.FindAsync(id);
             db.Abilities.Remove(ability);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

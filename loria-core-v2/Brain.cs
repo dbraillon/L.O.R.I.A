@@ -40,11 +40,11 @@ namespace Loria.Core
         {
             EventLog.WriteEntry(string.Concat("Loria recognized something : ", stimuli));
 
-            Ability stimulatedAbility = LoriaTool.GetAbility(stimuli);
+            Receipe stimulatedAbility = LoriaTool.GetAbility(stimuli);
 
             if (stimulatedAbility != null)
             {
-                foreach (Skill skill in stimulatedAbility.Skills)
+                foreach (Action skill in stimulatedAbility.Skills)
                 {
                     SkillAction skillAction = SkillLoader.GetSkillAction(skill);
 

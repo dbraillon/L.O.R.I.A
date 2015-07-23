@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1EEB1CFA-EBB9-45DB-8649-F7DFB43F5FFB}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{B9AC6763-E329-49D3-9187-0E28056D4370}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Loria.Dal</RootNamespace>
-    <AssemblyName>Loria.Dal</AssemblyName>
+    <RootNamespace>Loria.Core</RootNamespace>
+    <AssemblyName>Loria.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -46,26 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="ApplicationDbInitializer.cs" />
-    <Compile Include="Entities\ActionItem.cs" />
-    <Compile Include="Entities\Channel.cs" />
-    <Compile Include="Entities\Receipe.cs" />
-    <Compile Include="Entities\Ingredient.cs" />
-    <Compile Include="Entities\ReceipeIn.cs" />
-    <Compile Include="Entities\ReceipeOut.cs" />
-    <Compile Include="Entities\TriggerItem.cs" />
-    <Compile Include="Entities\Action.cs" />
-    <Compile Include="Entities\Trigger.cs" />
-    <Compile Include="Enums\EItemType.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Loria.Dal\Loria.Dal.csproj">
+      <Project>{1eeb1cfa-ebb9-45db-8649-f7dfb43f5ffb}</Project>
+      <Name>Loria.Dal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@ namespace Loria.Core.Skills
 {
     public static class SkillLoader
     {
-        public static SkillAction GetSkillAction(Skill skill)
+        public static SkillAction GetSkillAction(Action skill)
         {
             if (skill.Recipe == SkillRecipe.Talk)
             {

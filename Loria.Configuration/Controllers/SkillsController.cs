@@ -29,7 +29,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Skill skill = await db.Skills.FindAsync(id);
+            Action skill = await db.Skills.FindAsync(id);
             if (skill == null)
             {
                 return HttpNotFound();
@@ -48,7 +48,7 @@ namespace Loria.Configuration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Recipe,FirstValue,SecondValue")] Skill skill)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Recipe,FirstValue,SecondValue")] Action skill)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Skill skill = await db.Skills.FindAsync(id);
+            Action skill = await db.Skills.FindAsync(id);
             if (skill == null)
             {
                 return HttpNotFound();
@@ -80,7 +80,7 @@ namespace Loria.Configuration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Recipe,FirstValue,SecondValue")] Skill skill)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Recipe,FirstValue,SecondValue")] Action skill)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace Loria.Configuration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Skill skill = await db.Skills.FindAsync(id);
+            Action skill = await db.Skills.FindAsync(id);
             if (skill == null)
             {
                 return HttpNotFound();
@@ -111,7 +111,7 @@ namespace Loria.Configuration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Skill skill = await db.Skills.FindAsync(id);
+            Action skill = await db.Skills.FindAsync(id);
             db.Skills.Remove(skill);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
