@@ -24,7 +24,7 @@ namespace Loria.Core.Skills
 
         private void TalkSkill_OnFirstLaunch()
         {
-            Synthesizer.Speak(FirstValue);
+            //Synthesizer.Speak(FirstValue);
         }
 
         public void Dispose()

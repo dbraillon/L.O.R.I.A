@@ -11,7 +11,7 @@ namespace Loria.Core.Skills
     public delegate void OnFirstLaunchHandler();
     public delegate void OnMainLaunchHandler();
 
-    public class SkillAction : Action
+    public class SkillAction : Loria.Dal.Entities.Action
     {
         public event OnFirstLaunchHandler OnFirstLaunch;
         public event OnFirstLaunchHandler OnMainLaunch;

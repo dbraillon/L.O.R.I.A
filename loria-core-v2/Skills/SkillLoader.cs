@@ -9,17 +9,17 @@ namespace Loria.Core.Skills
 {
     public static class SkillLoader
     {
-        public static SkillAction GetSkillAction(Action skill)
+        public static SkillAction GetSkillAction(Loria.Dal.Entities.Action skill)
         {
-            if (skill.Recipe == SkillRecipe.Talk)
-            {
-                TalkSkill talkSkill = new TalkSkill();
-                talkSkill.FirstValue = skill.FirstValue;
-                talkSkill.SecondValue = skill.SecondValue;
-                talkSkill.Recipe = skill.Recipe;
+            //if (skill.Recipe == SkillRecipe.Talk)
+            //{
+            //    TalkSkill talkSkill = new TalkSkill();
+            //    talkSkill.FirstValue = skill.FirstValue;
+            //    talkSkill.SecondValue = skill.SecondValue;
+            //    talkSkill.Recipe = skill.Recipe;
 
-                return talkSkill;
-            }
+            //    return talkSkill;
+            //}
 
             return null;
         }

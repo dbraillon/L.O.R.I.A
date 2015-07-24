@@ -37,10 +37,10 @@ namespace Loria.Core.Senses
             Stimulus = new List<string>();
         }
 
-        public Sense GetSense()
-        {
-            return Sense.Hearing;
-        }
+        //public Sense GetSense()
+        //{
+        //    return Sense.Hearing;
+        //}
 
         public void AddStimulus(params string[] stimulus)
         {

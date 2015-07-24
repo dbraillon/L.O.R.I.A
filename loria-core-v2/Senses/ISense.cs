@@ -11,7 +11,7 @@ namespace Loria.Core.Senses
 
     public interface ISense
     {
-        Sense GetSense();
+        //Sense GetSense();
         void StartSensing();
         void StopSensing();
         void AddStimulus(params string[] stimulus);

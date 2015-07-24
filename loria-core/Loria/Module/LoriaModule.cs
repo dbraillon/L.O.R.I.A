@@ -1,4 +1,5 @@
 ﻿using Loria.Core.Debug;
+using Loria.Core.Loria.Module.Config.Models;
 using Loria.Core.Loria.Module.LoriaActions;
 using Loria.Core.src.Loria.Module;
 using Loria.Core.src.Loria.Module.CoreModules;
@@ -51,7 +52,8 @@ namespace Loria.Module
                     foreach (XmlNode actionNode in actionNodes)
                     {
                         XmlAttribute actionTypeAttribute = actionNode.Attributes["type"];
-                        string actionType = actionTypeAttribute.Value.ToLower();
+                        LoriaActionType actionType = (LoriaActionType)Enum.Parse(typeof(LoriaActionType), actionTypeAttribute.Value);
+
 
                         LoriaAction loriaAction = null;
 

@@ -22,7 +22,7 @@ namespace Loria.Core.Loria.Module.Config
 
         public IEnumerable<LoriaModule> LoadModules()
         {
-            
+            return null;
         }
 
         private void Log(LogType logType, string logMessage, params object[] logVariables)

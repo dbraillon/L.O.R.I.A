@@ -2,7 +2,6 @@
 using Loria.Core.Skills;
 using Loria.Core.Speeches;
 using Loria.Dal.Entities;
-using Loria.Dal.Tools;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +22,7 @@ namespace Loria.Core
             try
             {
                 EventLog.WriteEntry("Configuring Loria hearing sense...");
-                HearingSense.GetInstance().AddStimulus(LoriaTool.GetAllStimulus(senses: Sense.Hearing, eventLog: EventLog));
+                //HearingSense.GetInstance().AddStimulus(LoriaTool.GetAllStimulus(senses: Sense.Hearing, eventLog: EventLog));
                 HearingSense.GetInstance().StimulusRecognized += Sense_StimulusRecognized;
                 HearingSense.GetInstance().StartSensing();
                 EventLog.WriteEntry("Loria hearing sense configured...");
@@ -40,20 +39,20 @@ namespace Loria.Core
         {
             EventLog.WriteEntry(string.Concat("Loria recognized something : ", stimuli));
 
-            Receipe stimulatedAbility = LoriaTool.GetAbility(stimuli);
+            //Receipe stimulatedAbility = LoriaTool.GetAbility(stimuli);
 
-            if (stimulatedAbility != null)
-            {
-                foreach (Action skill in stimulatedAbility.Skills)
-                {
-                    SkillAction skillAction = SkillLoader.GetSkillAction(skill);
+            //if (stimulatedAbility != null)
+            //{
+            //    foreach (Action skill in stimulatedAbility.Skills)
+            //    {
+            //        SkillAction skillAction = SkillLoader.GetSkillAction(skill);
 
-                    if (skillAction != null)
-                    {
-                        skillAction.FirstLaunch();
-                    }
-                }
-            }
+            //        if (skillAction != null)
+            //        {
+            //            skillAction.FirstLaunch();
+            //        }
+            //    }
+            //}
         }
     }
 }
