@@ -16,5 +16,10 @@ namespace Loria.Dal.Entities
 
         public virtual Receipe Receipe { get; set; }
         public virtual ActionItem ActionItem { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0} is {1}", Receipe.ToString(), Value);
+        }
     }
 }

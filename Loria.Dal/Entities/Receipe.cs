@@ -14,5 +14,10 @@ namespace Loria.Dal.Entities
 
         public virtual ICollection<ReceipeIn> ReceipeIns { get; set; }
         public virtual ICollection<ReceipeOut> ReceipeOuts { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
