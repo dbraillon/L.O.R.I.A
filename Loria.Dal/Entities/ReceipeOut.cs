@@ -19,7 +19,7 @@ namespace Loria.Dal.Entities
 
         public override string ToString()
         {
-            return string.Format("{0} is {1}", Receipe.ToString(), Value);
+            return Value;
         }
     }
 }

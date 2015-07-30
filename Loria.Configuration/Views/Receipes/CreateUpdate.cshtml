@@ -1,4 +1,4 @@
-﻿@model Loria.Configuration.Models.ReceipeCreateUpdateViewModel
+﻿@model Loria.Configuration.Models.ReceipeCreateUpdateModel
 
 @{
     ViewBag.Title = "Create";
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            If @Html.ActionLink((string)ViewBag.ReceipeInDescription, "CreateUpdate", "ReceipeIn") then @Html.ActionLink((string)ViewBag.ReceipeOutDescription, "CreateUpdate", "ReceipeOut")
+            If <button id="ReceipeInButton">@ViewBag.ReceipeInDescription</button> then <button id="ReceipeOutButton">@ViewBag.ReceipeOutDescription</button>
         </div>
 
         <div class="form-group">
@@ -43,4 +43,17 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+
+            $("#ReceipeInButton").click(function () {
+                $("form").attr("action", "@Url.Action("CreateUpdate", "ReceipeIns")").submit();
+            });
+
+            $("#ReceipeOutButton").click(function () {
+                $("form").attr("action", "@Url.Action("CreateUpdate", "ReceipeOuts")").submit();
+            });
+
+        });
+    </script>
 }

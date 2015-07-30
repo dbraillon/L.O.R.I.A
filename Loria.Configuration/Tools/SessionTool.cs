@@ -23,12 +23,17 @@ namespace Loria.Configuration.Tools
     {
         private const string ReceipeInSessionKey = "ReceipeInSession";
         private const string ReceipeOutSessionKey = "ReceipeOutSession";
+        private const string ReceipeIdSessionKey = "ReceipeIdSession";
+        private const string ReceipeNameSessionKey = "ReceipeNameSession";
 
-        public static void ClearReceipeInOutSession()
+        public static void ClearSession()
         {
             if (HttpContext.Current != null)
             {
                 HttpContext.Current.Session.Remove(ReceipeInSessionKey);
+                HttpContext.Current.Session.Remove(ReceipeOutSessionKey);
+                HttpContext.Current.Session.Remove(ReceipeIdSessionKey);
+                HttpContext.Current.Session.Remove(ReceipeNameSessionKey);
             }
         }
 
@@ -79,6 +84,56 @@ namespace Loria.Configuration.Tools
             if (HttpContext.Current != null)
             {
                 HttpContext.Current.Session.Add(ReceipeOutSessionKey, model);
+            }
+        }
+
+        public static int? GetReceipeIdSession()
+        {
+            int? receipeId = null;
+
+            if (HttpContext.Current != null)
+            {
+                int? sessionReceipeId = (int?)HttpContext.Current.Session[ReceipeIdSessionKey];
+
+                if (sessionReceipeId != null)
+                {
+                    receipeId = sessionReceipeId;
+                }
+            }
+
+            return receipeId;
+        }
+
+        public static void SetReceipeIdSession(int? receipeId)
+        {
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session.Add(ReceipeIdSessionKey, receipeId);
+            }
+        }
+
+        public static string GetReceipeNameSession()
+        {
+            string receipeName = null;
+
+            if (HttpContext.Current != null)
+            {
+                string sessionReceipeName = (string)HttpContext.Current.Session[ReceipeNameSessionKey];
+
+                if (sessionReceipeName != null)
+                {
+                    receipeName = sessionReceipeName;
+                }
+            }
+
+            return receipeName;
+        }
+
+        public static void SetReceipeNameSession(string receipeName)
+        {
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session.Add(ReceipeNameSessionKey, receipeName);
             }
         }
     }

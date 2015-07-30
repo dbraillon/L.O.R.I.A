@@ -26,28 +26,19 @@ namespace Loria.Configuration.Controllers
             return View(entities);
         }
 
-        // GET: Receipes/CreateUpdate
-        public async Task<ActionResult> CreateUpdate(int? id)
+        public async Task<ActionResult> PrepareCreateUpdate(int? id)
         {
-            if (id == null)
-            {
-                ReceipeInSessionModel receipeInSessionModel = SessionTool.GetReceipeInSessionModel();
-                ReceipeOutSessionModel receipeOutSessionModel = SessionTool.GetReceipeOutSessionModel();
+            SessionTool.ClearSession();
 
-                ViewBag.ReceipeInDescription = receipeInSessionModel != null ? receipeInSessionModel.Description : "Click to choose a trigger";
-                ViewBag.ReceipeOutDescription = receipeOutSessionModel != null ? receipeOutSessionModel.Description : "Click to choose an action";
-            }
-            else
+            if (id.HasValue)
             {
-                SessionTool.ClearReceipeInOutSession();
-
                 Receipe receipe = await db.Receipes.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (receipe != null)
                 {
                     ReceipeIn receipeIn = receipe.ReceipeIns.FirstOrDefault();
                     ReceipeOut receipeOut = receipe.ReceipeOuts.FirstOrDefault();
-
+                    
                     if (receipeIn != null)
                     {
                         SessionTool.SetReceipeInSessionModel(new ReceipeInSessionModel() { Description = receipeIn.ToString(), TriggerItemId = receipeIn.TriggerItemId, Value = receipeIn.Value });
@@ -58,20 +49,36 @@ namespace Loria.Configuration.Controllers
                         SessionTool.SetReceipeOutSessionModel(new ReceipeOutSessionModel() { Description = receipeOut.ToString(), ActionItemId = receipeOut.ActionItemId, Value = receipeOut.Value });
                     }
 
-                    ViewBag.ReceipeInDescription = receipeIn != null ? receipeIn.ToString() : "Click to choose a trigger";
-                    ViewBag.ReceipeOutDescription = receipeOut != null ? receipeOut.ToString() : "Click to choose an action";
-
-                    return View(new ReceipeCreateUpdateViewModel() { Id = receipe.Id, Name = receipe.Name });
+                    SessionTool.SetReceipeIdSession(receipe.Id);
+                    SessionTool.SetReceipeNameSession(receipe.Name);
                 }
             }
 
-            return View();
+            return RedirectToAction("CreateUpdate", new { id = id });
+        }
+
+        // GET: Receipes/CreateUpdate
+        public ActionResult CreateUpdate(int? id)
+        {
+            ReceipeCreateUpdateModel model = new ReceipeCreateUpdateModel()
+            {
+                Id = SessionTool.GetReceipeIdSession(),
+                Name = SessionTool.GetReceipeNameSession()
+            };
+
+            ReceipeInSessionModel receipeInSessionModel = SessionTool.GetReceipeInSessionModel();
+            ReceipeOutSessionModel receipeOutSessionModel = SessionTool.GetReceipeOutSessionModel();
+
+            ViewBag.ReceipeInDescription = receipeInSessionModel != null ? receipeInSessionModel.Description : "Click to choose a trigger";
+            ViewBag.ReceipeOutDescription = receipeOutSessionModel != null ? receipeOutSessionModel.Description : "Click to choose an action";
+            
+            return View(model);
         }
 
         // POST: Receipes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateUpdate(ReceipeCreateUpdateViewModel model)
+        public async Task<ActionResult> CreateUpdate(ReceipeCreateUpdateModel model)
         {
             ReceipeInSessionModel receipeInSessionModel = SessionTool.GetReceipeInSessionModel();
             ReceipeOutSessionModel receipeOutSessionModel = SessionTool.GetReceipeOutSessionModel();
@@ -90,9 +97,26 @@ namespace Loria.Configuration.Controllers
             {
                 if (model.Id == null)
                 {
-                    Receipe receipe = new Receipe() { Name = model.Name };
-                    ReceipeIn receipeIn = new ReceipeIn() { Receipe = receipe, TriggerItemId = receipeInSessionModel.TriggerItemId, Value = receipeInSessionModel.Value };
-                    ReceipeOut receipeOut = new ReceipeOut() { Receipe = receipe, ActionItemId = receipeOutSessionModel.ActionItemId, Value = receipeOutSessionModel.Value };
+                    Receipe receipe = new Receipe()
+                    {
+                        Name = model.Name,
+                        ReceipeIns = new ReceipeIn[]
+                        {
+                            new ReceipeIn()
+                            {
+                                TriggerItemId = receipeInSessionModel.TriggerItemId,
+                                Value = receipeInSessionModel.Value
+                            }
+                        },
+                        ReceipeOuts = new ReceipeOut[]
+                        {
+                            new ReceipeOut()
+                            {
+                                ActionItemId = receipeOutSessionModel.ActionItemId,
+                                Value = receipeOutSessionModel.Value
+                            }
+                        }
+                    };
 
                     db.Receipes.Add(receipe);
                     await db.SaveChangesAsync();
@@ -141,7 +165,7 @@ namespace Loria.Configuration.Controllers
             ViewBag.ReceipeInDescription = receipeInSessionModel != null ? receipeInSessionModel.Description : "Click to choose a trigger";
             ViewBag.ReceipeOutDescription = receipeOutSessionModel != null ? receipeOutSessionModel.Description : "Click to choose an action";
 
-            return View();
+            return View(model);
         }
 
         // GET: Receipes/Delete/5

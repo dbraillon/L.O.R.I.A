@@ -5,9 +5,9 @@ using System.Web;
 
 namespace Loria.Configuration.Models
 {
-    public class ReceipeCreateUpdateModel
+    public class ReceipeOutCreateUpdateModel
     {
-        public int? Id { get; set; }
-        public string Name { get; set; }
+        public int ActionItemId { get; set; }
+        public string Value { get; set; }
     }
 }
