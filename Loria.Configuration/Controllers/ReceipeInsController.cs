@@ -26,14 +26,14 @@ namespace Loria.Configuration.Controllers
             SessionTool.SetReceipeIdSession(id);
             SessionTool.SetReceipeNameSession(name);
 
-            ViewBag.TriggerItems = new SelectList(await db.TriggerItems.ToListAsync(), "Id", "Name");
+            ViewBag.Channels = new SelectList(await db.Channels.Where(x => x.Triggers.Count != 0).ToListAsync(), "Id", "Name");
             
-            ReceipeInSessionModel sessionModel = SessionTool.GetReceipeInSessionModel();
+            //ReceipeInSessionModel sessionModel = SessionTool.GetReceipeInSessionModel();
 
-            if (sessionModel != null)
-            {
-                return View(new ReceipeInCreateUpdateModel() { TriggerItemId = sessionModel.TriggerItemId, Value = sessionModel.Value });
-            }
+            //if (sessionModel != null)
+            //{
+            //    return View(new ReceipeInCreateUpdateModel() { TriggerItemId = sessionModel.TriggerItemId, Value = sessionModel.Value });
+            //}
 
             return View();
         }
@@ -56,6 +56,15 @@ namespace Loria.Configuration.Controllers
             ViewBag.TriggerItems = new SelectList(await db.TriggerItems.ToListAsync(), "Id", "Name");
 
             return View(model);
+        }
+
+        // POST: ReceipeIns/GetTriggers
+        [HttpPost]
+        public async Task<ActionResult> GetTriggers(int channelId)
+        {
+            List<Trigger> triggers = await db.Triggers.Where(x => x.ChannelId == channelId).ToListAsync();
+
+            return Json(triggers);
         }
 
         protected override void Dispose(bool disposing)
